@@ -1,12 +1,11 @@
 import { h } from "preact";
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import { CharacterSheet } from "./components/CharacterSheet";
 import {
   parseScript,
   groupCharactersByTeam,
   ParsedScript,
 } from "./utils/scriptParser";
-import { generatePDF } from "./utils/pdfGenerator";
 import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
 import "./app.css";
@@ -16,7 +15,50 @@ export function App() {
   const [rawScript, setRawScript] = useState<Script | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [color, setColor] = useState("#74131B");
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [showAuthor, setShowAuthor] = useState(true);
+  const [isScriptSorted, setIsScriptSorted] = useState(true);
+
+  const checkIfSorted = (currentScript: Script): boolean => {
+    try {
+      const sorted = sortScript(currentScript);
+      return JSON.stringify(currentScript) === JSON.stringify(sorted);
+    } catch {
+      return true; // Assume sorted if we can't check
+    }
+  };
+
+  const loadScript = (json: Script) => {
+    setRawScript(json);
+    const parsed = parseScript(json);
+    setScript(parsed);
+    setIsScriptSorted(checkIfSorted(json));
+    setError(null);
+  };
+
+  useEffect(() => {
+    const handlePaste = (event: ClipboardEvent) => {
+      // Get pasted text
+      const pastedText = event.clipboardData?.getData("text");
+      if (!pastedText) return;
+
+      // Try to parse as JSON
+      try {
+        const json = JSON.parse(pastedText);
+        loadScript(json);
+      } catch (err) {
+        // Ignore paste if it's not valid JSON - user might be pasting something else
+        console.log("Pasted content is not valid JSON, ignoring");
+      }
+    };
+
+    // Add paste event listener
+    document.addEventListener("paste", handlePaste);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("paste", handlePaste);
+    };
+  }, []); // Empty dependency array since loadScript is stable
 
   const handleFileUpload = (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -28,10 +70,7 @@ export function App() {
     reader.onload = (e) => {
       try {
         const json = JSON.parse(e.target?.result as string);
-        setRawScript(json);
-        const parsed = parseScript(json);
-        setScript(parsed);
-        setError(null);
+        loadScript(json);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to parse JSON");
         setScript(null);
@@ -49,26 +88,10 @@ export function App() {
       setRawScript(sorted);
       const parsed = parseScript(sorted);
       setScript(parsed);
+      setIsScriptSorted(true);
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to sort script");
-    }
-  };
-
-  const handleDownloadPDF = async () => {
-    if (!script) return;
-
-    setIsGenerating(true);
-    try {
-      const scriptName = script.metadata?.name || "script";
-      const filename = `${scriptName
-        .replace(/[^a-z0-9]/gi, "_")
-        .toLowerCase()}.pdf`;
-      await generatePDF("character-sheet", filename);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to generate PDF");
-    } finally {
-      setIsGenerating(false);
     }
   };
 
@@ -82,7 +105,7 @@ export function App() {
         <div className="control-panel">
           <div className="upload-section">
             <label htmlFor="file-upload" className="upload-label">
-              Upload Script JSON
+              Upload JSON
             </label>
             <input
               id="file-upload"
@@ -91,34 +114,75 @@ export function App() {
               onChange={handleFileUpload}
               className="file-input"
             />
+            <p className="paste-hint">
+              or paste directly with Ctrl+V (Cmd+V on Mac)
+            </p>
           </div>
 
           {script && (
             <>
-              <div className="color-picker-section">
-                <label htmlFor="sidebar-color" className="color-label">
-                  Script Color:
-                </label>
-                <input
-                  id="sidebar-color"
-                  type="color"
-                  value={color}
-                  onChange={(e) =>
-                    setColor((e.target as HTMLInputElement).value)
-                  }
-                  className="color-input"
-                />
-              </div>
+              <div className="controls-grid">
+                <div className="control-group">
+                  <label className="control-group-label">Appearance</label>
+                  <div className="control-group-content">
+                    <div className="color-picker-section">
+                      <label htmlFor="sidebar-color" className="color-label">
+                        Script Color:
+                      </label>
+                      <input
+                        id="sidebar-color"
+                        type="color"
+                        value={color}
+                        onChange={(e) =>
+                          setColor((e.target as HTMLInputElement).value)
+                        }
+                        className="color-input"
+                      />
+                    </div>
 
-              <button onClick={handleSort} className="sort-button">
-                Sort Script
-              </button>
-              <button onClick={() => window.print()} className="print-button">
-                Print
-              </button>
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
+                          checked={showAuthor}
+                          onChange={(e) =>
+                            setShowAuthor(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">Show Author</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="control-group">
+                  <label className="control-group-label">Actions</label>
+                  <div className="control-group-content">
+                    <button onClick={handleSort} className="sort-button">
+                      Sort Script
+                    </button>
+                    <button
+                      onClick={() => window.print()}
+                      className="print-button"
+                    >
+                      Print
+                    </button>
+                  </div>
+                </div>
+              </div>
             </>
           )}
         </div>
+
+        {!isScriptSorted && script && (
+          <div className="warning-message">
+            <strong>⚠️ Script Not Sorted:</strong> This script doesn't follow
+            the official sorting order. Click "Sort Script" to fix this.
+          </div>
+        )}
 
         {error && <div className="error-message">{error}</div>}
       </div>
@@ -128,7 +192,7 @@ export function App() {
           <div className="sheet-wrapper">
             <CharacterSheet
               title={script.metadata?.name || "Custom Script"}
-              author={script.metadata?.author}
+              author={showAuthor ? script.metadata?.author : undefined}
               characters={groupCharactersByTeam(script.characters)}
               color={color}
             />
@@ -152,7 +216,7 @@ export function App() {
             />
           </svg>
           <p className="placeholder-text">
-            Upload a JSON script file to get started
+            Upload a JSON script file or paste JSON anywhere on the page
           </p>
         </div>
       )}

@@ -78,7 +78,7 @@ export function CharacterSheet({
       ></div>
       <div className="sheet-content">
         <h1 className="sheet-header">{title}</h1>
-        <h2 className="sheet-author">by {author}</h2>
+        {author && <h2 className="sheet-author">by {author}</h2>}
 
         <div className="characters-grid">
           {sections.map((section, i) => (

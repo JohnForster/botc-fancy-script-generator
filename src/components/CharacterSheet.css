@@ -181,6 +181,7 @@
   line-height: 1.2;
   margin: 0;
   color: #222;
+  display: inline-block;
 }
 
 .sheet-footer {
@@ -208,7 +209,8 @@
 }
 
 .setup-ability {
-  white-space: nowrap;
+  display: inline-block; /* Keep it together */
+  white-space: normal; /* Allow internal wrapping if it's long */
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
 }
 
