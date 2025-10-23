@@ -23,7 +23,7 @@ body {
 
 .app-title {
   text-align: center;
-  color: white;
+  color: #eeeeee;
   font-size: 36px;
   margin: 0 0 30px 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -53,7 +53,7 @@ body {
   display: inline-block;
   padding: 12px 24px;
   background: #667eea;
-  color: white;
+  color: #eeeeee;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
@@ -90,7 +90,7 @@ body {
 .sort-button {
   padding: 12px 24px;
   background: #667eea;
-  color: white;
+  color: #eeeeee;
   border: none;
   border-radius: 8px;
   font-weight: 600;
@@ -106,7 +106,7 @@ body {
 .download-button {
   padding: 12px 24px;
   background: #48bb78;
-  color: white;
+  color: #eeeeee;
   border: none;
   border-radius: 8px;
   font-weight: 600;

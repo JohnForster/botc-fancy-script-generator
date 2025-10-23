@@ -43,13 +43,11 @@ export function CharacterSheet({
     },
   ].filter((section) => section.chars.length > 0);
 
+  // TODO Improve color adjustment algorithm for saturation and lightness
   const [h, s, l] = rgbToHsl(...parseRgb(color));
   const [H, S, L] = rgbToHsl(...parseRgb("#74131B"));
-  console.log("H,S,L:", H, S, L);
-  console.log("H, s/S, l/L:", H, s, l / L);
 
   const lAdj = 9.5 * l * l + 0.48 * l; // Adjustment based on coords (0,0), (0.3,1) (1,10)
-  console.log("l, lAdj:", l, lAdj);
 
   return (
     <div className="character-sheet" id="character-sheet">
@@ -60,7 +58,6 @@ export function CharacterSheet({
           // filter: `hue-rotate(${h}deg)`,
         }}
       ></div>
-
       <div className="sheet-content">
         <h1
           className="sheet-header"
@@ -143,6 +140,23 @@ function CharacterCard({ character, color }: CharacterCardProps) {
     return character.image[0];
   };
 
+  const renderAbility = (ability: string) => {
+    // Match square brackets at the end of the ability
+    const match = ability.match(/^(.*?)(\[.*?\])$/);
+
+    if (match) {
+      const [, beforeBrackets, brackets] = match;
+      return (
+        <>
+          {beforeBrackets}
+          <strong className="setup-ability">{brackets}</strong>
+        </>
+      );
+    }
+
+    return ability;
+  };
+
   const imageUrl = getImageUrl();
 
   return (
@@ -161,7 +175,7 @@ function CharacterCard({ character, color }: CharacterCardProps) {
         <h3 className="character-name" style={{ color: color }}>
           {character.name}
         </h3>
-        <p className="character-ability">{character.ability}</p>
+        <p className="character-ability">{renderAbility(character.ability)}</p>
       </div>
     </div>
   );
