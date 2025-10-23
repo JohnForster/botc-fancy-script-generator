@@ -78,13 +78,14 @@ export function CharacterSheet({
       ></div>
       <div className="sheet-content">
         <h1 className="sheet-header">{title}</h1>
+        <h2 className="sheet-author">by {author}</h2>
 
         <div className="characters-grid">
           {sections.map((section, i) => (
             <>
               <CharacterSection
                 key={section.key}
-                title={section.title}
+                title={section.title.toUpperCase()}
                 characters={section.chars}
                 sidebarColor={color}
                 charNameColor={section.color}
@@ -96,7 +97,13 @@ export function CharacterSheet({
           ))}
         </div>
 
-        <div className="sheet-footer">*Not the first night</div>
+        <div className="sheet-footer">
+          <span className="asterisk">*</span>Not the first night
+        </div>
+        <div className="author-credit">
+          <p>© Steven Medway bloodontheclocktower.com</p>
+          <p>Script template by John Forster ravenswoodstudio.xyz</p>
+        </div>
       </div>
     </div>
   );

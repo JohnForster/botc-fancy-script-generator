@@ -75,7 +75,9 @@ export function App() {
   return (
     <div className="app">
       <div className="controls">
-        <h1 className="app-title">Blood on the Clocktower Script PDF Maker</h1>
+        <h1 className="app-title">
+          Blood on the Clocktower Fancy Script Generator
+        </h1>
 
         <div className="control-panel">
           <div className="upload-section">
@@ -111,13 +113,8 @@ export function App() {
               <button onClick={handleSort} className="sort-button">
                 Sort Script
               </button>
-
-              <button
-                onClick={handleDownloadPDF}
-                disabled={isGenerating}
-                className="download-button"
-              >
-                {isGenerating ? "Generating PDF..." : "Download PDF"}
+              <button onClick={() => window.print()} className="print-button">
+                Print
               </button>
             </>
           )}
@@ -128,7 +125,6 @@ export function App() {
 
       {script && (
         <div className="preview-section">
-          <h2 className="preview-title">Preview</h2>
           <div className="sheet-wrapper">
             <CharacterSheet
               title={script.metadata?.name || "Custom Script"}

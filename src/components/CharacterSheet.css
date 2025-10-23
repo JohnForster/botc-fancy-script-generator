@@ -38,7 +38,7 @@
 }
 
 .sheet-content {
-  padding: 5mm 10mm 10mm 0;
+  padding: 5mm 10mm 3mm 0;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -79,6 +79,15 @@
   -webkit-text-fill-color: transparent;
 }
 
+.sheet-author {
+  font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-size: 3.5mm;
+  font-weight: bold;
+  text-align: center;
+  margin: -5mm 0 3mm 0;
+  color: #333;
+}
+
 .characters-grid {
   display: flex;
   flex-direction: column;
@@ -92,17 +101,21 @@
 }
 
 .section-title {
-  font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Dumbledor", serif;
+  font-weight: lighter;
   padding: 0 3.5mm;
   color: #eeeeee;
   margin: 0;
   margin-left: -15mm;
   min-width: 15mm;
-  text-orientation: sideways;
-  /* display: none; */
   text-align: center;
-  writing-mode: sideways-lr;
   z-index: 1;
+
+  text-orientation: upright;
+  writing-mode: vertical-lr;
+  letter-spacing: -0.6mm;
+  font-size: 4mm;
+  line-height: 2;
 }
 
 .section-divider {
@@ -175,9 +188,23 @@
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.5mm;
   color: #222;
-  margin-top: 5mm;
-  padding-top: 4mm;
   opacity: 0.7;
+}
+
+.asterisk {
+  font-size: 5mm;
+}
+
+.author-credit {
+  font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-size: 3.2mm;
+  margin-left: 5mm;
+  color: #222;
+  opacity: 0.6;
+}
+.author-credit p {
+  font-size: 2.5mm;
+  margin: 0;
 }
 
 .setup-ability {
