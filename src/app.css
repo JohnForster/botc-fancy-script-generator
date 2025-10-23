@@ -3,8 +3,19 @@
 }
 
 @font-face {
-  font-family: Unlovable; /* set name */
-  src: url(fonts/LHF_Unlovable.ttf); /* url of the font */
+  font-family: Unlovable;
+  src: url("fonts/LHF Unlovable/LHF Unlovable.eot");
+  src: url("fonts/LHF Unlovable/LHF Unlovable.eot?#iefix")
+      format("embedded-opentype"),
+    url("fonts/LHF Unlovable/LHF Unlovable.woff") format("woff"),
+    url("fonts/LHF Unlovable/LHF Unlovable.woff2") format("woff2"),
+    url("fonts/LHF Unlovable/LHF Unlovable.ttf") format("truetype"),
+    url("fonts/LHF Unlovable/LHF Unlovable.svg#LHF Unlovable") format("svg");
+}
+
+@font-face {
+  font-family: Trade Gothic;
+  src: url("fonts/Trade Gothic/Trade Gothic LT STD.otf");
 }
 
 body {

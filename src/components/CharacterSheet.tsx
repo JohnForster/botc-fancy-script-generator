@@ -2,6 +2,7 @@ import { ResolvedCharacter } from "../types/schema";
 import { GroupedCharacters } from "../utils/scriptParser";
 import { parseRgb, rgbToHsl } from "../utils/colorAlgorithms";
 import "./CharacterSheet.css";
+import { type CSSProperties } from "preact";
 
 interface CharacterSheetProps {
   title: string;
@@ -49,8 +50,25 @@ export function CharacterSheet({
 
   const lAdj = 9.5 * l * l + 0.48 * l; // Adjustment based on coords (0,0), (0.3,1) (1,10)
 
+  // Calculate darkened version of color for gradient
+  const [r, g, b] = parseRgb(color);
+  const darkenFactor = 0.2; // Darken to 20% of original brightness
+  const rDark = Math.round(r * darkenFactor);
+  const gDark = Math.round(g * darkenFactor);
+  const bDark = Math.round(b * darkenFactor);
+  const colorDark = `rgb(${rDark}, ${gDark}, ${bDark})`;
+
   return (
-    <div className="character-sheet" id="character-sheet">
+    <div
+      className="character-sheet"
+      id="character-sheet"
+      style={
+        {
+          "--header-color-light": color,
+          "--header-color-dark": colorDark,
+        } as CSSProperties
+      }
+    >
       <div
         className="sidebar-container"
         style={{
@@ -59,16 +77,7 @@ export function CharacterSheet({
         }}
       ></div>
       <div className="sheet-content">
-        <h1
-          className="sheet-header"
-          style={{
-            filter: `hue-rotate(${h}deg) saturate(${s}) brightness(${
-              (lAdj * 2) / 3
-            })`,
-          }}
-        >
-          {title}
-        </h1>
+        <h1 className="sheet-header">{title}</h1>
 
         <div className="characters-grid">
           {sections.map((section, i) => (
@@ -87,7 +96,7 @@ export function CharacterSheet({
           ))}
         </div>
 
-        <div className="sheet-footer">*Not the First Night</div>
+        <div className="sheet-footer">*Not the first night</div>
       </div>
     </div>
   );
@@ -112,7 +121,9 @@ function CharacterSection({
         {characters.map((char) => (
           <CharacterCard key={char.id} character={char} color={charNameColor} />
         ))}
-        {characters.length % 2 === 1 && <div></div>}
+        {characters.length % 2 === 1 && (
+          <div className="character-column-spacer"></div>
+        )}
       </div>
     </div>
   );

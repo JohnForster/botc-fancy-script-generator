@@ -1,7 +1,8 @@
 .character-sheet {
-  width: 210mm; /* A4 width */
+  width: 210mm;
+  min-height: 297mm; /* A4 height */
   max-height: 297mm; /* A4 height */
-  background-image: url(images/parchment_texture_a4.jpg);
+  background-image: url(images/parchment_texture_a4_lightened.jpg);
   background-size: cover;
   position: relative;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -10,12 +11,12 @@
 }
 
 .sidebar-container {
-  width: 40px;
+  width: 15mm;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   background-image: url(images/sidebar.jpg);
-  background-size: 400px;
+  background-size: 105mm;
 }
 
 .sidebar-section {
@@ -25,45 +26,63 @@
   justify-content: center;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  padding: 10px 0;
+  padding: 3mm 0;
 }
 
 .sidebar-label {
-  font-size: 14px;
+  font-size: 3.5mm;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 0.5mm;
   color: #eeeeee;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 0.3mm 0.3mm 0.5mm rgba(0, 0, 0, 0.3);
 }
 
 .sheet-content {
-  padding: 10mm 10mm 10mm 0;
+  padding: 5mm 10mm 10mm 0;
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
+.character-column-spacer {
+  min-height: 13mm;
+}
+
 .sheet-header {
   font-family: "Unlovable", serif;
   font-weight: 100;
-  font-size: 42px;
+  font-size: 14mm;
+  line-height: 1.2;
   text-align: center;
-  margin: 0 0 20px 0;
+  margin: 0 0 4mm 0;
   /* color: #eee; */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  letter-spacing: 2px;
+  /* text-shadow: 0.5mm 0.5mm 1mm rgba(0, 0, 0, 0.1); */
 
-  -webkit-background-clip: text;
+  font-weight: lighter;
+  letter-spacing: 0mm;
+  filter: drop-shadow(0.2mm 0.1mm 0 #2228);
+  word-spacing: -3mm;
+
+  /* -webkit-background-clip: text;
   background-clip: text;
   background-image: url("images/sidebar.jpg");
-  background-size: 100px;
-  color: transparent;
+  background-size: 26mm;
+  color: transparent; */
+
+  background: linear-gradient(
+    -40deg,
+    var(--header-color-light) 30%,
+    var(--header-color-dark)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .characters-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2.5mm;
   flex: 1;
 }
 
@@ -74,11 +93,11 @@
 
 .section-title {
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
-  padding: 0 5px;
+  padding: 0 3.5mm;
   color: #eeeeee;
   margin: 0;
-  margin-left: -40px;
-  min-width: 40px;
+  margin-left: -15mm;
+  min-width: 15mm;
   text-orientation: sideways;
   /* display: none; */
   text-align: center;
@@ -87,36 +106,42 @@
 }
 
 .section-divider {
-  height: 3px;
-  opacity: 0.5;
-  width: 80%;
+  height: 0.8mm;
+  opacity: 1;
+  margin-left: -50%;
+  width: 150%;
   mix-blend-mode: soft-light;
 }
 
 .character-list {
-  padding-left: 15px;
+  margin-left: 8mm;
   column-count: 2;
-  column-gap: 20px;
+  column-gap: 5mm;
 }
 
 .character-card {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 2.5mm;
   break-inside: avoid;
-  margin-bottom: 10px;
+  margin-bottom: 2.5mm;
+}
+
+.character-info {
+  padding-left: 2mm;
 }
 
 .character-icon-wrapper {
+  display: flex;
   flex-shrink: 0;
 }
 
 .character-icon,
 .character-icon-placeholder {
-  width: 50px;
-  max-height: 50px;
+  width: 13mm;
+  max-height: 13mm;
   object-fit: contain;
-  scale: 1.4;
+  scale: 1.6;
 }
 
 .character-icon-placeholder {
@@ -125,33 +150,33 @@
   justify-content: center;
   color: #eeeeee;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 6mm;
 }
 
 .character-name {
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 13px;
+  font-size: 3.2mm;
   font-weight: 700;
-  margin: 0 0 2px 0;
+  margin: 0 0 0.5mm 0;
   color: #1a202c;
 }
 
 .character-ability {
   font-family: "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
-  font-size: 11px;
-  line-height: 1.3;
+  font-size: 2.8mm;
+  line-height: 1.2;
   margin: 0;
   color: #222;
 }
 
 .sheet-footer {
   text-align: center;
-  font-family: "Unlovable", serif;
-  font-size: 14px;
+  font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-size: 3.5mm;
   color: #222;
-  margin-top: 20px;
-  padding-top: 15px;
+  margin-top: 5mm;
+  padding-top: 4mm;
   opacity: 0.7;
 }
 

@@ -15,7 +15,7 @@ export function App() {
   const [script, setScript] = useState<ParsedScript | null>(null);
   const [rawScript, setRawScript] = useState<Script | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [color, setColor] = useState("#4a5568");
+  const [color, setColor] = useState("#74131B");
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleFileUpload = (event: Event) => {
