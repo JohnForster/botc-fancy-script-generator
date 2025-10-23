@@ -17,6 +17,7 @@ export function App() {
   const [error, setError] = useState<string | null>(null);
   const [color, setColor] = useState("#74131B");
   const [showAuthor, setShowAuthor] = useState(true);
+  const [showJinxes, setShowJinxes] = useState(true);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
 
@@ -176,6 +177,22 @@ export function App() {
                         <span className="toggle-text">Show Author</span>
                       </label>
                     </div>
+
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
+                          checked={showJinxes}
+                          onChange={(e) =>
+                            setShowJinxes(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">Show Jinxes</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
 
@@ -234,7 +251,7 @@ export function App() {
               author={showAuthor ? script.metadata?.author : undefined}
               characters={groupCharactersByTeam(script.characters)}
               color={color}
-              jinxes={findJinxes(script.characters)}
+              jinxes={showJinxes && rawScript ? findJinxes(script.characters, rawScript) : []}
             />
           </div>
         </div>

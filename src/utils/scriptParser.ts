@@ -120,14 +120,47 @@ export interface Jinx {
   jinx: string;
 }
 
-export function findJinxes(characters: ResolvedCharacter[]): Jinx[] {
+export function findJinxes(characters: ResolvedCharacter[], script: Script): Jinx[] {
   const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
   const applicableJinxes: Jinx[] = [];
 
+  // Add global jinxes from jinxes.json
   for (const jinx of jinxesData as Jinx[]) {
     const [char1, char2] = jinx.characters;
     if (characterIds.has(char1) && characterIds.has(char2)) {
       applicableJinxes.push(jinx);
+    }
+  }
+
+  // Extract jinxes from custom characters in the script
+  for (const element of script) {
+    if (typeof element === "object" && element !== null && "jinxes" in element) {
+      const customChar = element as ScriptCharacter;
+      const char1Id = customChar.id.toLowerCase();
+
+      // Only process if this character is in the script
+      if (characterIds.has(char1Id) && customChar.jinxes) {
+        for (const jinxPair of customChar.jinxes) {
+          const char2Id = jinxPair.id.toLowerCase();
+
+          // Only add if both characters are in the script
+          if (characterIds.has(char2Id)) {
+            // Check if this jinx already exists (to avoid duplicates)
+            const exists = applicableJinxes.some(
+              (j) =>
+                (j.characters[0] === char1Id && j.characters[1] === char2Id) ||
+                (j.characters[0] === char2Id && j.characters[1] === char1Id)
+            );
+
+            if (!exists) {
+              applicableJinxes.push({
+                characters: [char1Id, char2Id],
+                jinx: jinxPair.reason,
+              });
+            }
+          }
+        }
+      }
     }
   }
 

@@ -116,10 +116,10 @@ export function CharacterSheet({
         <div className="sheet-footer">
           <span className="asterisk">*</span>Not the first night
         </div>
-        <div className="author-credit">
-          <p>© Steven Medway bloodontheclocktower.com</p>
-          <p>Script template by John Forster ravenswoodstudio.xyz</p>
-        </div>
+      </div>
+      <div className="author-credit">
+        <p>© Steven Medway bloodontheclocktower.com</p>
+        <p>Script template by John Forster ravenswoodstudio.xyz</p>
       </div>
     </div>
   );
@@ -239,54 +239,72 @@ function JinxesSection({ jinxes, allCharacters }: JinxesSectionProps) {
     return character.image[0];
   };
 
+  const renderJinxItem = (jinx: Jinx, i: number) => {
+    const char1 = characterMap.get(jinx.characters[0]);
+    const char2 = characterMap.get(jinx.characters[1]);
+
+    return (
+      <div key={i} className="jinx-item">
+        <div className="jinx-icons">
+          {char1 && (
+            <div className="jinx-icon-wrapper">
+              {getImageUrl(char1) ? (
+                <img
+                  src={getImageUrl(char1)!}
+                  alt={char1.name}
+                  className="jinx-icon"
+                />
+              ) : (
+                <div className="jinx-icon-placeholder">
+                  {char1.name.charAt(0)}
+                </div>
+              )}
+            </div>
+          )}
+          <span className="jinx-divider"></span>
+          {char2 && (
+            <div className="jinx-icon-wrapper">
+              {getImageUrl(char2) ? (
+                <img
+                  src={getImageUrl(char2)!}
+                  alt={char2.name}
+                  className="jinx-icon"
+                />
+              ) : (
+                <div className="jinx-icon-placeholder">
+                  {char2.name.charAt(0)}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <p className="jinx-text">{jinx.jinx}</p>
+      </div>
+    );
+  };
+
+  const useTwoColumns = jinxes.length > 4;
+  const midpoint = useTwoColumns ? Math.ceil(jinxes.length / 2) : jinxes.length;
+  const leftColumn = jinxes.slice(0, midpoint);
+  const rightColumn = jinxes.slice(midpoint);
+
   return (
     <div className="jinxes-section">
       <h2 className="section-title"></h2>
-      <div className="jinxes-list">
-        {jinxes.map((jinx, i) => {
-          const char1 = characterMap.get(jinx.characters[0]);
-          const char2 = characterMap.get(jinx.characters[1]);
-
-          return (
-            <div key={i} className="jinx-item">
-              <div className="jinx-icons">
-                {char1 && (
-                  <div className="jinx-icon-wrapper">
-                    {getImageUrl(char1) ? (
-                      <img
-                        src={getImageUrl(char1)!}
-                        alt={char1.name}
-                        className="jinx-icon"
-                      />
-                    ) : (
-                      <div className="jinx-icon-placeholder">
-                        {char1.name.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                )}
-                <span className="jinx-divider"></span>
-                {char2 && (
-                  <div className="jinx-icon-wrapper">
-                    {getImageUrl(char2) ? (
-                      <img
-                        src={getImageUrl(char2)!}
-                        alt={char2.name}
-                        className="jinx-icon"
-                      />
-                    ) : (
-                      <div className="jinx-icon-placeholder">
-                        {char2.name.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-              <p className="jinx-text">{jinx.jinx}</p>
-            </div>
-          );
-        })}
-      </div>
+      {useTwoColumns ? (
+        <div className="jinxes-list jinxes-two-columns">
+          <div className="jinx-column">
+            {leftColumn.map((jinx, i) => renderJinxItem(jinx, i))}
+          </div>
+          <div className="jinx-column">
+            {rightColumn.map((jinx, i) => renderJinxItem(jinx, midpoint + i))}
+          </div>
+        </div>
+      ) : (
+        <div className="jinxes-list">
+          {jinxes.map((jinx, i) => renderJinxItem(jinx, i))}
+        </div>
+      )}
     </div>
   );
 }

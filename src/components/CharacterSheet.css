@@ -105,8 +105,7 @@
   font-weight: lighter;
   padding: 0 3.5mm;
   color: #eeeeee;
-  margin: 0;
-  margin-left: -15mm;
+  margin: -6mm 0 -6mm -15mm;
   min-width: 15mm;
   text-align: center;
   z-index: 1;
@@ -197,11 +196,14 @@
 }
 
 .author-credit {
+  position: absolute;
+  bottom: 3mm;
+  right: 3mm;
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.2mm;
-  margin-left: 5mm;
   color: #222;
   opacity: 0.6;
+  text-align: right;
 }
 .author-credit p {
   font-size: 2.5mm;
@@ -224,14 +226,25 @@
   margin-left: 8mm;
   display: flex;
   flex-direction: column;
-  gap: 3mm;
+}
+
+.jinxes-two-columns {
+  flex-direction: row;
+  gap: 5mm;
+}
+
+.jinx-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .jinx-item {
   display: flex;
   gap: 2.5mm;
-  align-items: flex-start;
+  align-items: center;
   break-inside: avoid;
+  margin-bottom: 2mm;
 }
 
 .jinx-icons {
@@ -275,7 +288,7 @@
 .jinx-text {
   font-family: "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
-  font-size: 2.8mm;
+  font-size: 2.6mm;
   line-height: 1.2;
   margin: 0;
   color: #222;
