@@ -6,6 +6,7 @@ import {
   ResolvedCharacter,
 } from "../types/schema";
 import { ALL_CHARACTERS } from "../data/all_characters";
+import jinxesData from "../data/jinxes.json";
 
 export interface ParsedScript {
   metadata: ScriptMetadata | null;
@@ -112,4 +113,23 @@ export function groupCharactersByTeam(
   }
 
   return grouped;
+}
+
+export interface Jinx {
+  characters: [string, string];
+  jinx: string;
+}
+
+export function findJinxes(characters: ResolvedCharacter[]): Jinx[] {
+  const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
+  const applicableJinxes: Jinx[] = [];
+
+  for (const jinx of jinxesData as Jinx[]) {
+    const [char1, char2] = jinx.characters;
+    if (characterIds.has(char1) && characterIds.has(char2)) {
+      applicableJinxes.push(jinx);
+    }
+  }
+
+  return applicableJinxes;
 }

@@ -214,6 +214,74 @@
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
 }
 
+.jinxes-section {
+  display: flex;
+  break-inside: avoid;
+  margin-top: 1mm;
+}
+
+.jinxes-list {
+  margin-left: 8mm;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.jinx-item {
+  display: flex;
+  gap: 2.5mm;
+  align-items: flex-start;
+  break-inside: avoid;
+}
+
+.jinx-icons {
+  display: flex;
+  gap: 1mm;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.jinx-icon-wrapper {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.jinx-icon,
+.jinx-icon-placeholder {
+  width: 3.5mm;
+  height: 3.5mm;
+  object-fit: contain;
+  scale: 2.8;
+}
+
+.jinx-icon-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eeeeee;
+  font-weight: bold;
+  font-size: 2mm;
+}
+
+.jinx-divider {
+  font-family: "Dumbledor", serif;
+  font-size: 4.6mm;
+  color: #1a202c;
+  line-height: 3.5mm;
+  margin: 0 0.5mm;
+}
+
+.jinx-text {
+  font-family: "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
+    sans-serif;
+  font-size: 2.8mm;
+  line-height: 1.2;
+  margin: 0;
+  color: #222;
+  padding-top: 0.5mm;
+}
+
 @media print {
   html {
     visibility: hidden;

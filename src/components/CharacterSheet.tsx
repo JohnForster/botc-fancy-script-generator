@@ -1,5 +1,5 @@
 import { ResolvedCharacter } from "../types/schema";
-import { GroupedCharacters } from "../utils/scriptParser";
+import { GroupedCharacters, Jinx } from "../utils/scriptParser";
 import { parseRgb, rgbToHsl } from "../utils/colorAlgorithms";
 import "./CharacterSheet.css";
 import { type CSSProperties } from "preact";
@@ -9,6 +9,7 @@ interface CharacterSheetProps {
   author?: string;
   characters: GroupedCharacters;
   color: string;
+  jinxes: Jinx[];
 }
 
 export function CharacterSheet({
@@ -16,6 +17,7 @@ export function CharacterSheet({
   author,
   characters,
   color = "#4a5568",
+  jinxes = [],
 }: CharacterSheetProps) {
   const sections = [
     {
@@ -95,6 +97,20 @@ export function CharacterSheet({
               )}
             </>
           ))}
+          {jinxes.length > 0 && (
+            <>
+              <img src="images/divider.png" className="section-divider" />
+              <JinxesSection
+                jinxes={jinxes}
+                allCharacters={[
+                  ...characters.townsfolk,
+                  ...characters.outsider,
+                  ...characters.minion,
+                  ...characters.demon,
+                ]}
+              />
+            </>
+          )}
         </div>
 
         <div className="sheet-footer">
@@ -194,6 +210,82 @@ function CharacterCard({ character, color }: CharacterCardProps) {
           {character.name}
         </h3>
         <p className="character-ability">{renderAbility(character.ability)}</p>
+      </div>
+    </div>
+  );
+}
+
+interface JinxesSectionProps {
+  jinxes: Jinx[];
+  allCharacters: ResolvedCharacter[];
+}
+
+function JinxesSection({ jinxes, allCharacters }: JinxesSectionProps) {
+  // Create a map for quick character lookup
+  const characterMap = new Map(
+    allCharacters.map((char) => [char.id.toLowerCase(), char])
+  );
+
+  const getImageUrl = (character: ResolvedCharacter) => {
+    if (character.wiki_image) {
+      return character.wiki_image;
+    }
+    if (!character.image) {
+      return null;
+    }
+    if (typeof character.image === "string") {
+      return character.image;
+    }
+    return character.image[0];
+  };
+
+  return (
+    <div className="jinxes-section">
+      <h2 className="section-title"></h2>
+      <div className="jinxes-list">
+        {jinxes.map((jinx, i) => {
+          const char1 = characterMap.get(jinx.characters[0]);
+          const char2 = characterMap.get(jinx.characters[1]);
+
+          return (
+            <div key={i} className="jinx-item">
+              <div className="jinx-icons">
+                {char1 && (
+                  <div className="jinx-icon-wrapper">
+                    {getImageUrl(char1) ? (
+                      <img
+                        src={getImageUrl(char1)!}
+                        alt={char1.name}
+                        className="jinx-icon"
+                      />
+                    ) : (
+                      <div className="jinx-icon-placeholder">
+                        {char1.name.charAt(0)}
+                      </div>
+                    )}
+                  </div>
+                )}
+                <span className="jinx-divider"></span>
+                {char2 && (
+                  <div className="jinx-icon-wrapper">
+                    {getImageUrl(char2) ? (
+                      <img
+                        src={getImageUrl(char2)!}
+                        alt={char2.name}
+                        className="jinx-icon"
+                      />
+                    ) : (
+                      <div className="jinx-icon-placeholder">
+                        {char2.name.charAt(0)}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              <p className="jinx-text">{jinx.jinx}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

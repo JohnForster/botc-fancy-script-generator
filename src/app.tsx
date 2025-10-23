@@ -4,6 +4,7 @@ import { CharacterSheet } from "./components/CharacterSheet";
 import {
   parseScript,
   groupCharactersByTeam,
+  findJinxes,
   ParsedScript,
 } from "./utils/scriptParser";
 import { sortScript } from "botc-script-checker";
@@ -200,9 +201,7 @@ export function App() {
         {script && (
           <div className="script-editor-section">
             <div className="script-editor-header">
-              <label className="script-editor-label">
-                Edit Script JSON:
-              </label>
+              <label className="script-editor-label">Edit Script JSON:</label>
               <button className="update-button">Update</button>
             </div>
             <textarea
@@ -212,7 +211,7 @@ export function App() {
                 handleScriptTextChange((e.target as HTMLTextAreaElement).value)
               }
               rows={20}
-              spellCheck={false}
+              spellcheck={false}
             />
           </div>
         )}
@@ -235,6 +234,7 @@ export function App() {
               author={showAuthor ? script.metadata?.author : undefined}
               characters={groupCharactersByTeam(script.characters)}
               color={color}
+              jinxes={findJinxes(script.characters)}
             />
           </div>
         </div>
