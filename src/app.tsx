@@ -17,6 +17,7 @@ export function App() {
   const [color, setColor] = useState("#74131B");
   const [showAuthor, setShowAuthor] = useState(true);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
+  const [scriptText, setScriptText] = useState("");
 
   const checkIfSorted = (currentScript: Script): boolean => {
     try {
@@ -31,8 +32,26 @@ export function App() {
     setRawScript(json);
     const parsed = parseScript(json);
     setScript(parsed);
+    setScriptText(JSON.stringify(json, null, 2));
     setIsScriptSorted(checkIfSorted(json));
     setError(null);
+  };
+
+  const handleScriptTextChange = (newText: string) => {
+    setScriptText(newText);
+
+    // Try to parse and update in real-time
+    try {
+      const json = JSON.parse(newText);
+      setRawScript(json);
+      const parsed = parseScript(json);
+      setScript(parsed);
+      setIsScriptSorted(checkIfSorted(json));
+      setError(null);
+    } catch (err) {
+      // Keep the error state but don't block typing
+      setError(err instanceof Error ? err.message : "Invalid JSON format");
+    }
   };
 
   useEffect(() => {
@@ -88,6 +107,7 @@ export function App() {
       setRawScript(sorted);
       const parsed = parseScript(sorted);
       setScript(parsed);
+      setScriptText(JSON.stringify(sorted, null, 2));
       setIsScriptSorted(true);
       setError(null);
     } catch (err) {
@@ -176,6 +196,26 @@ export function App() {
             </>
           )}
         </div>
+
+        {script && (
+          <div className="script-editor-section">
+            <div className="script-editor-header">
+              <label className="script-editor-label">
+                Edit Script JSON:
+              </label>
+              <button className="update-button">Update</button>
+            </div>
+            <textarea
+              className="script-editor-textarea"
+              value={scriptText}
+              onChange={(e) =>
+                handleScriptTextChange((e.target as HTMLTextAreaElement).value)
+              }
+              rows={20}
+              spellCheck={false}
+            />
+          </div>
+        )}
 
         {!isScriptSorted && script && (
           <div className="warning-message">

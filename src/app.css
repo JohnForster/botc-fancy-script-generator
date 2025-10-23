@@ -101,6 +101,9 @@ body {
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 10px 30px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .control-panel {
@@ -256,6 +259,75 @@ body {
 .sort-button:active,
 .print-button:active {
   transform: translateY(0);
+}
+
+.script-editor-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.script-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.script-editor-label {
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.update-button {
+  padding: 8px 16px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px var(--shadow-light);
+}
+
+.update-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px var(--shadow);
+}
+
+.update-button:active {
+  transform: translateY(0);
+}
+
+.script-editor-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-family: 'Courier New', Consolas, Monaco, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+  min-height: 200px;
+  flex: 1;
+}
+
+.script-editor-textarea:focus {
+  outline: none;
+  border-color: var(--button-bg);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .warning-message {
