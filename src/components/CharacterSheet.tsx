@@ -12,6 +12,7 @@ interface CharacterSheetProps {
   jinxes: Jinx[];
   showSwirls?: boolean;
   includeMargins?: boolean;
+  solidTitle?: boolean;
 }
 
 export function CharacterSheet({
@@ -22,6 +23,7 @@ export function CharacterSheet({
   jinxes = [],
   showSwirls = true,
   includeMargins = false,
+  solidTitle = false,
 }: CharacterSheetProps) {
   const sections = [
     {
@@ -66,7 +68,12 @@ export function CharacterSheet({
     >
       <Sidebar color={color} />
       <div className="sheet-content">
-        <Header showSwirls={showSwirls} title={title} author={author} />
+        <Header
+          showSwirls={showSwirls}
+          title={title}
+          author={author}
+          solidHeader={solidTitle}
+        />
 
         <div className="characters-grid">
           {sections.map((section, i) => (
@@ -115,10 +122,12 @@ function Header({
   showSwirls,
   title,
   author,
+  solidHeader = false,
 }: {
   showSwirls: boolean;
   title: string;
   author?: string;
+  solidHeader?: boolean;
 }) {
   return (
     <>
@@ -129,7 +138,13 @@ function Header({
             className="swirl-divider"
           ></img>
         )}
-        <span>{title}</span>
+        <span
+          style={{
+            mixBlendMode: solidHeader ? "normal" : "multiply",
+          }}
+        >
+          {title}
+        </span>
         {showSwirls && (
           <img
             src="images/black-swirl-divider.png"

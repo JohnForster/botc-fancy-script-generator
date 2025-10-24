@@ -20,6 +20,7 @@ export function App() {
   const [showJinxes, setShowJinxes] = useState(true);
   const [showSwirls, setShowSwirls] = useState(true);
   const [includeMargins, setIncludeMargins] = useState(false);
+  const [solidHeader, setSolidHeader] = useState(false);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
 
@@ -168,6 +169,9 @@ export function App() {
                         id="sidebar-color"
                         type="color"
                         value={color}
+                        onInput={(e) =>
+                          setColor((e.target as HTMLInputElement).value)
+                        }
                         onChange={(e) =>
                           setColor((e.target as HTMLInputElement).value)
                         }
@@ -220,6 +224,22 @@ export function App() {
                           className="toggle-input"
                         />
                         <span className="toggle-text">Show Swirls</span>
+                      </label>
+                    </div>
+
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
+                          checked={solidHeader}
+                          onChange={(e) =>
+                            setSolidHeader(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">Solid Title</span>
                       </label>
                     </div>
 
@@ -303,6 +323,7 @@ export function App() {
               }
               showSwirls={showSwirls}
               includeMargins={includeMargins}
+              solidTitle={solidHeader}
             />
           </div>
         </div>
