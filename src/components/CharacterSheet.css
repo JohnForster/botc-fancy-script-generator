@@ -12,7 +12,7 @@
 }
 
 .sidebar-background {
-  background-image: url(images/sidebar-desaturated.jpg);
+  background-image: url(images/sidebar-desaturated-small.jpg);
   background-size: 105mm;
   width: 15mm;
   height: 100%;
@@ -72,7 +72,7 @@
 .sheet-header span {
   font-weight: lighter;
   letter-spacing: 0mm;
-  filter: drop-shadow(0.2mm 0.1mm 0 #222d);
+  filter: drop-shadow(0.2mm 0.1mm 0 #222d) drop-shadow(0mm 0mm 0.1mm #2228);
   word-spacing: -3mm;
 
   background: linear-gradient(
@@ -323,14 +323,7 @@
 }
 
 @media print {
-  html {
-    visibility: hidden;
-  }
-
-  .character-sheet {
-    visibility: visible;
-    position: absolute;
-    left: 0;
-    top: 0;
+  .sidebar-background {
+    background-size: 25mm;
   }
 }

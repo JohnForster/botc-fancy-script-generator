@@ -10,6 +10,7 @@ import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
 import exampleScript from "./data/example-script.json";
 import "./app.css";
+import { SheetBack } from "./components/SheetBack";
 
 export function App() {
   const [script, setScript] = useState<ParsedScript | null>(null);
@@ -21,6 +22,7 @@ export function App() {
   const [showSwirls, setShowSwirls] = useState(true);
   const [includeMargins, setIncludeMargins] = useState(false);
   const [solidHeader, setSolidHeader] = useState(false);
+  const [showBackingSheet, setShowBackingSheet] = useState(true);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
 
@@ -258,6 +260,24 @@ export function App() {
                         <span className="toggle-text">Include Margins</span>
                       </label>
                     </div>
+
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
+                          checked={showBackingSheet}
+                          onChange={(e) =>
+                            setShowBackingSheet(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">
+                          Include Backing Sheet
+                        </span>
+                      </label>
+                    </div>
                   </div>
                 </div>
 
@@ -325,6 +345,14 @@ export function App() {
               includeMargins={includeMargins}
               solidTitle={solidHeader}
             />
+
+            {showBackingSheet && (
+              <SheetBack
+                title={script.metadata?.name || "Custom Script"}
+                color={color}
+                includeMargins={includeMargins}
+              />
+            )}
           </div>
         </div>
       )}

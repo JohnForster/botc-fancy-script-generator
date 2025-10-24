@@ -1,0 +1,57 @@
+.sheet-backing {
+  position: relative;
+  width: 210mm;
+  min-height: 297mm; /* A4 height */
+  max-height: 297mm; /* A4 height */
+}
+
+.sheet-background {
+  width: 210mm;
+  min-height: 297mm; /* A4 height */
+  max-height: 297mm; /* A4 height */
+  background-image: url(images/sidebar-desaturated-small.jpg);
+  background-repeat: repeat;
+  background-size: 105mm;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheet-back-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.sheet-backing h1 {
+  font-family: "Unlovable", serif;
+  mix-blend-mode: normal;
+  font-weight: 100;
+  font-size: 30mm;
+  color: #ae9d7f;
+  text-wrap: wrap;
+  z-index: 1;
+  flex-shrink: 1;
+  width: 100mm;
+  text-align: center;
+  padding: 20mm 0;
+
+  background-image: url(images/parchment_texture.jpg);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 100mm;
+  filter: drop-shadow(0.5mm 0.5mm black) drop-shadow(0mm 0mm 1mm black);
+}
+
+@media print {
+  .sheet-background {
+    background-size: 25mm;
+  }
+}
