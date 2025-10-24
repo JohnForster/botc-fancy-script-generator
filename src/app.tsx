@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { CharacterSheet } from "./components/CharacterSheet";
 import {
@@ -9,6 +8,7 @@ import {
 } from "./utils/scriptParser";
 import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
+import exampleScript from "./data/example-script.json";
 import "./app.css";
 
 export function App() {
@@ -18,6 +18,7 @@ export function App() {
   const [color, setColor] = useState("#74131B");
   const [showAuthor, setShowAuthor] = useState(true);
   const [showJinxes, setShowJinxes] = useState(true);
+  const [showSwirls, setShowSwirls] = useState(true);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
 
@@ -117,6 +118,10 @@ export function App() {
     }
   };
 
+  const handleLoadExample = () => {
+    loadScript(exampleScript as Script);
+  };
+
   return (
     <div className="app">
       <div className="controls">
@@ -136,10 +141,17 @@ export function App() {
               onChange={handleFileUpload}
               className="file-input"
             />
-            <p className="paste-hint">
-              or paste directly with Ctrl+V (Cmd+V on Mac)
-            </p>
+            <div className="or">or</div>
+            <div className="paste-hint">Paste directly with ctrl+V / ⌘+V</div>
           </div>
+
+          {!script && (
+            <div className="example-section">
+              <button onClick={handleLoadExample} className="example-button">
+                Load Example Script
+              </button>
+            </div>
+          )}
 
           {script && (
             <>
@@ -191,6 +203,22 @@ export function App() {
                           className="toggle-input"
                         />
                         <span className="toggle-text">Show Jinxes</span>
+                      </label>
+                    </div>
+
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
+                          checked={showSwirls}
+                          onChange={(e) =>
+                            setShowSwirls(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">Show Swirls</span>
                       </label>
                     </div>
                   </div>
@@ -251,7 +279,12 @@ export function App() {
               author={showAuthor ? script.metadata?.author : undefined}
               characters={groupCharactersByTeam(script.characters)}
               color={color}
-              jinxes={showJinxes && rawScript ? findJinxes(script.characters, rawScript) : []}
+              jinxes={
+                showJinxes && rawScript
+                  ? findJinxes(script.characters, rawScript)
+                  : []
+              }
+              showSwirls={showSwirls}
             />
           </div>
         </div>

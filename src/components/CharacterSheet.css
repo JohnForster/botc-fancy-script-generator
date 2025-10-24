@@ -48,26 +48,21 @@
   min-height: 13mm;
 }
 
+.sheet-header-container {
+  display: flex;
+  align-items: center;
+}
+
 .sheet-header {
-  font-family: "Unlovable", serif;
-  font-weight: 100;
-  font-size: 14mm;
-  line-height: 1.2;
   text-align: center;
   margin: 0 0 4mm 0;
-  /* color: #eee; */
-  /* text-shadow: 0.5mm 0.5mm 1mm rgba(0, 0, 0, 0.1); */
+}
 
+.sheet-header span {
   font-weight: lighter;
   letter-spacing: 0mm;
   filter: drop-shadow(0.2mm 0.1mm 0 #2228);
   word-spacing: -3mm;
-
-  /* -webkit-background-clip: text;
-  background-clip: text;
-  background-image: url("images/sidebar.jpg");
-  background-size: 26mm;
-  color: transparent; */
 
   background: linear-gradient(
     -40deg,
@@ -77,6 +72,21 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: "Unlovable", serif;
+  font-weight: 100;
+  font-size: 14mm;
+  line-height: 1.2;
+}
+
+.swirl-divider {
+  width: 35mm;
+  margin: auto 3mm;
+  mix-blend-mode: soft-light;
+}
+
+.flip {
+  transform: scaleX(-1);
+  /* transform: rotate(180deg); */
 }
 
 .sheet-author {

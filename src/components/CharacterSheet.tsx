@@ -10,6 +10,7 @@ interface CharacterSheetProps {
   characters: GroupedCharacters;
   color: string;
   jinxes: Jinx[];
+  showSwirls?: boolean;
 }
 
 export function CharacterSheet({
@@ -18,6 +19,7 @@ export function CharacterSheet({
   characters,
   color = "#4a5568",
   jinxes = [],
+  showSwirls = true,
 }: CharacterSheetProps) {
   const sections = [
     {
@@ -79,7 +81,22 @@ export function CharacterSheet({
         }}
       ></div>
       <div className="sheet-content">
-        <h1 className="sheet-header">{title}</h1>
+        <h1 className="sheet-header">
+          {showSwirls && (
+            <img
+              src="images/black-swirl-divider.png"
+              className="swirl-divider"
+            ></img>
+          )}
+          <span>{title}</span>
+          {showSwirls && (
+            <img
+              src="images/black-swirl-divider.png"
+              className="swirl-divider flip"
+            ></img>
+          )}
+        </h1>
+
         {author && <h2 className="sheet-author">by {author}</h2>}
 
         <div className="characters-grid">

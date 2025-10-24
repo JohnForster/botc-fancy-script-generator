@@ -114,7 +114,8 @@ body {
 
 .upload-section {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  gap: 10px;
   align-items: center;
 }
 
@@ -141,7 +142,18 @@ body {
 .paste-hint {
   opacity: 0.7;
   font-style: italic;
-  padding: 0 10px;
+  text-align: center;
+}
+
+.or {
+  text-align: center;
+}
+
+.example-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .file-input {
@@ -313,7 +325,7 @@ body {
   padding: 12px;
   border: 2px solid var(--border-color);
   border-radius: 8px;
-  font-family: 'Courier New', Consolas, Monaco, monospace;
+  font-family: "Courier New", Consolas, Monaco, monospace;
   font-size: 13px;
   line-height: 1.5;
   resize: vertical;
@@ -378,6 +390,7 @@ body {
   padding: 80px 40px;
   text-align: center;
   box-shadow: 0 10px 30px var(--shadow);
+  min-width: 210mm;
 }
 
 .placeholder-icon {
@@ -400,4 +413,29 @@ body {
   margin: 0;
   opacity: 0.7;
   font-style: italic;
+}
+
+.example-button {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px var(--shadow-light);
+  text-wrap: nowrap;
+}
+
+.example-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.example-button:active {
+  transform: translateY(0);
 }
