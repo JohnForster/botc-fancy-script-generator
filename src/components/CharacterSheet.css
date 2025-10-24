@@ -90,7 +90,8 @@
   font-family: "Unlovable", serif;
   font-weight: 100;
   font-size: 14mm;
-  padding: 2mm 0;
+  padding: 2mm 2mm;
+  margin: 0 -2mm;
   mix-blend-mode: multiply;
 }
 
