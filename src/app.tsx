@@ -19,6 +19,7 @@ export function App() {
   const [showAuthor, setShowAuthor] = useState(true);
   const [showJinxes, setShowJinxes] = useState(true);
   const [showSwirls, setShowSwirls] = useState(true);
+  const [includeMargins, setIncludeMargins] = useState(false);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
 
@@ -221,6 +222,22 @@ export function App() {
                         <span className="toggle-text">Show Swirls</span>
                       </label>
                     </div>
+
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
+                          checked={includeMargins}
+                          onChange={(e) =>
+                            setIncludeMargins(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">Include Margins</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
 
@@ -285,6 +302,7 @@ export function App() {
                   : []
               }
               showSwirls={showSwirls}
+              includeMargins={includeMargins}
             />
           </div>
         </div>

@@ -381,7 +381,7 @@ body {
 .sheet-wrapper {
   display: flex;
   justify-content: center;
-  overflow-x: auto;
+  background: white;
 }
 
 .placeholder {

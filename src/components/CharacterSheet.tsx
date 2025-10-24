@@ -11,6 +11,7 @@ interface CharacterSheetProps {
   color: string;
   jinxes: Jinx[];
   showSwirls?: boolean;
+  includeMargins?: boolean;
 }
 
 export function CharacterSheet({
@@ -20,6 +21,7 @@ export function CharacterSheet({
   color = "#4a5568",
   jinxes = [],
   showSwirls = true,
+  includeMargins = false,
 }: CharacterSheetProps) {
   const sections = [
     {
@@ -70,6 +72,7 @@ export function CharacterSheet({
         {
           "--header-color-light": color,
           "--header-color-dark": colorDark,
+          transform: includeMargins ? "scale(0.952)" : undefined,
         } as CSSProperties
       }
     >
