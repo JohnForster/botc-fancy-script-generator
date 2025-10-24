@@ -41,6 +41,12 @@ export function App() {
     setScript(parsed);
     setScriptText(JSON.stringify(json, null, 2));
     setIsScriptSorted(checkIfSorted(json));
+
+    // Load colour from metadata if present
+    if (parsed.metadata?.colour && typeof parsed.metadata.colour === "string") {
+      setColor(parsed.metadata.colour);
+    }
+
     setError(null);
   };
 
@@ -54,6 +60,15 @@ export function App() {
       const parsed = parseScript(json);
       setScript(parsed);
       setIsScriptSorted(checkIfSorted(json));
+
+      // Load colour from metadata if present
+      if (
+        parsed.metadata?.colour &&
+        typeof parsed.metadata.colour === "string"
+      ) {
+        setColor(parsed.metadata.colour);
+      }
+
       setError(null);
     } catch (err) {
       // Keep the error state but don't block typing
@@ -126,6 +141,44 @@ export function App() {
     loadScript(exampleScript as Script);
   };
 
+  const handleColorChange = (newColor: string) => {
+    setColor(newColor);
+
+    // Update the colour in the script metadata
+    if (!rawScript) return;
+
+    const updatedScript = rawScript.map((element) => {
+      if (typeof element === "object" && element !== null && "id" in element) {
+        if (element.id === "_meta") {
+          return { ...element, colour: newColor };
+        }
+      }
+      return element;
+    });
+
+    setRawScript(updatedScript);
+    setScriptText(JSON.stringify(updatedScript, null, 2));
+  };
+
+  const handleSaveScript = () => {
+    if (!rawScript) return;
+
+    // Get script name from metadata or use default
+    const scriptName = script?.metadata?.name || "custom-script";
+    const filename = `${scriptName.toLowerCase().replace(/\s+/g, "-")}.json`;
+
+    // Create blob and download
+    const blob = new Blob([scriptText], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="app">
       <div className="controls">
@@ -172,10 +225,14 @@ export function App() {
                         type="color"
                         value={color}
                         onInput={(e) =>
-                          setColor((e.target as HTMLInputElement).value)
+                          handleColorChange(
+                            (e.target as HTMLInputElement).value
+                          )
                         }
                         onChange={(e) =>
-                          setColor((e.target as HTMLInputElement).value)
+                          handleColorChange(
+                            (e.target as HTMLInputElement).value
+                          )
                         }
                         className="color-input"
                       />
@@ -304,11 +361,23 @@ export function App() {
           )}
         </div>
 
+        {!isScriptSorted && script && (
+          <div className="warning-message">
+            <strong>⚠️ Script Not Sorted:</strong> This script doesn't follow
+            the official sorting order. Click "Sort Script" to fix this.
+          </div>
+        )}
+
         {script && (
           <div className="script-editor-section">
             <div className="script-editor-header">
               <label className="script-editor-label">Edit Script JSON:</label>
-              <button className="update-button">Update</button>
+              <div className="script-editor-buttons">
+                <button className="update-button">Update</button>
+                <button onClick={handleSaveScript} className="update-button">
+                  Save
+                </button>
+              </div>
             </div>
             <textarea
               className="script-editor-textarea"
@@ -319,13 +388,6 @@ export function App() {
               rows={20}
               spellcheck={false}
             />
-          </div>
-        )}
-
-        {!isScriptSorted && script && (
-          <div className="warning-message">
-            <strong>⚠️ Script Not Sorted:</strong> This script doesn't follow
-            the official sorting order. Click "Sort Script" to fix this.
           </div>
         )}
 

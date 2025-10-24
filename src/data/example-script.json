@@ -2,7 +2,8 @@
   {
     "id": "_meta",
     "author": "Dungeon Mister",
-    "name": "Blending In"
+    "name": "Blending In",
+    "colour": "#0a6621"
   },
   "steward",
   "librarian",

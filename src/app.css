@@ -341,6 +341,11 @@ body {
   color: var(--text-secondary);
 }
 
+.script-editor-buttons {
+  display: flex;
+  gap: 8px;
+}
+
 .update-button {
   padding: 8px 16px;
   background: var(--button-bg);
