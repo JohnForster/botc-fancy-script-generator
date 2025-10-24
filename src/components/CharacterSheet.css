@@ -49,7 +49,7 @@
 }
 
 .sheet-content {
-  padding: 5mm 10mm 3mm 0;
+  padding: 5mm 0 3mm 0;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -67,6 +67,10 @@
 .sheet-header {
   text-align: center;
   margin: 0 0 4mm 0;
+  padding: 0 10mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sheet-header span {
@@ -92,7 +96,6 @@
 
 .swirl-divider {
   width: 35mm;
-  margin: auto 3mm;
   mix-blend-mode: soft-light;
 }
 
@@ -106,7 +109,7 @@
   font-size: 3.5mm;
   font-weight: bold;
   text-align: center;
-  margin: -3mm 0 3mm 0;
+  margin: -5mm 0 3mm 0;
   color: #333;
 }
 
@@ -115,6 +118,7 @@
   flex-direction: column;
   gap: 2.5mm;
   flex: 1;
+  padding: 0 10mm 0 0;
 }
 
 .character-section {

@@ -51,3 +51,10 @@
   word-break: break-word;
   word-spacing: -10mm;
 }
+
+.sheet-backing h1 .ampersand {
+  font-size: 45mm;
+  line-height: 0;
+  vertical-align: -5mm;
+  margin: 0 -5mm;
+}
