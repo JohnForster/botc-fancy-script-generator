@@ -15,7 +15,7 @@ export function App() {
   const [script, setScript] = useState<ParsedScript | null>(null);
   const [rawScript, setRawScript] = useState<Script | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [color, setColor] = useState("#74131B");
+  const [color, setColor] = useState("#137415");
   const [showAuthor, setShowAuthor] = useState(true);
   const [showJinxes, setShowJinxes] = useState(true);
   const [showSwirls, setShowSwirls] = useState(true);

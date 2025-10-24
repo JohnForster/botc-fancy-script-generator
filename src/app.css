@@ -66,6 +66,14 @@
   font-family: Dumbledor;
   src: url("fonts/Dumbledor/Dumbledor.ttf");
 }
+@font-face {
+  font-family: Dumbledor Thin;
+  src: url("fonts/Dumbledor/DumbledorThin.ttf");
+}
+@font-face {
+  font-family: Dumbledor Wide;
+  src: url("fonts/Dumbledor/DumbledorWide.ttf");
+}
 
 body {
   margin: 0;
@@ -219,6 +227,36 @@ body {
 
 .color-input:hover {
   border-color: var(--button-bg);
+}
+
+.color-values {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.color-value-line {
+  font-family: "Courier New", monospace;
+}
+
+.slider-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slider-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.slider-input {
+  width: 100%;
+  cursor: pointer;
+  accent-color: var(--button-bg);
 }
 
 .toggle-section {

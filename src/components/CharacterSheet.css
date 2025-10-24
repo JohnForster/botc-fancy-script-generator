@@ -11,13 +11,23 @@
   overflow: hidden;
 }
 
-.sidebar-container {
-  width: 15mm;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  background-image: url(images/sidebar.jpg);
+.sidebar-background {
+  background-image: url(images/sidebar-desaturated.jpg);
   background-size: 105mm;
+  width: 15mm;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.sidebar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15mm;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  mix-blend-mode: multiply;
 }
 
 .sidebar-section {
@@ -62,12 +72,12 @@
 .sheet-header span {
   font-weight: lighter;
   letter-spacing: 0mm;
-  filter: drop-shadow(0.2mm 0.1mm 0 #2228);
+  filter: drop-shadow(0.2mm 0.1mm 0 #222d);
   word-spacing: -3mm;
 
   background: linear-gradient(
-    -40deg,
-    var(--header-color-light) 30%,
+    -20deg,
+    var(--header-color-light) 50%,
     var(--header-color-dark)
   );
   background-clip: text;
@@ -77,6 +87,7 @@
   font-weight: 100;
   font-size: 14mm;
   padding: 2mm 0;
+  mix-blend-mode: multiply;
 }
 
 .swirl-divider {
@@ -109,6 +120,7 @@
 .character-section {
   display: flex;
   break-inside: avoid;
+  min-height: 20mm;
 }
 
 .section-title {
@@ -126,6 +138,10 @@
   letter-spacing: -0.6mm;
   font-size: 4mm;
   line-height: 2;
+
+  filter: drop-shadow(0.1mm 0.1mm 0.3mm #222a)
+    drop-shadow(-0.1mm 0.1mm 0.3mm #2228) drop-shadow(0.1mm -0.1mm 0.3mm #222a)
+    drop-shadow(-0.1mm -0.1mm 0.3mm #222a);
 }
 
 .section-divider {

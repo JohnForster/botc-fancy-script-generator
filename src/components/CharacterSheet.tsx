@@ -1,6 +1,6 @@
 import { ResolvedCharacter } from "../types/schema";
+import { darken } from "../utils/colorAlgorithms";
 import { GroupedCharacters, Jinx } from "../utils/scriptParser";
-import { parseRgb, rgbToHsl } from "../utils/colorAlgorithms";
 import "./CharacterSheet.css";
 import { type CSSProperties } from "preact";
 
@@ -50,19 +50,7 @@ export function CharacterSheet({
     },
   ].filter((section) => section.chars.length > 0);
 
-  // TODO Improve color adjustment algorithm for saturation and lightness
-  const [h, s, l] = rgbToHsl(...parseRgb(color));
-  const [H, S, L] = rgbToHsl(...parseRgb("#74131B"));
-
-  const lAdj = 9.5 * l * l + 0.48 * l; // Adjustment based on coords (0,0), (0.3,1) (1,10)
-
-  // Calculate darkened version of color for gradient
-  const [r, g, b] = parseRgb(color);
-  const darkenFactor = 0.2; // Darken to 20% of original brightness
-  const rDark = Math.round(r * darkenFactor);
-  const gDark = Math.round(g * darkenFactor);
-  const bDark = Math.round(b * darkenFactor);
-  const colorDark = `rgb(${rDark}, ${gDark}, ${bDark})`;
+  const colorDark = darken(color, 0.4);
 
   return (
     <div
@@ -76,31 +64,9 @@ export function CharacterSheet({
         } as CSSProperties
       }
     >
-      <div
-        className="sidebar-container"
-        style={{
-          filter: `hue-rotate(${h}deg) saturate(${s}) brightness(${lAdj})`,
-          // filter: `hue-rotate(${h}deg)`,
-        }}
-      ></div>
+      <Sidebar color={color} />
       <div className="sheet-content">
-        <h1 className="sheet-header">
-          {showSwirls && (
-            <img
-              src="images/black-swirl-divider.png"
-              className="swirl-divider"
-            ></img>
-          )}
-          <span>{title}</span>
-          {showSwirls && (
-            <img
-              src="images/black-swirl-divider.png"
-              className="swirl-divider flip"
-            ></img>
-          )}
-        </h1>
-
-        {author && <h2 className="sheet-author">by {author}</h2>}
+        <Header showSwirls={showSwirls} title={title} author={author} />
 
         <div className="characters-grid">
           {sections.map((section, i) => (
@@ -141,6 +107,46 @@ export function CharacterSheet({
         <p>© Steven Medway bloodontheclocktower.com</p>
         <p>Script template by John Forster ravenswoodstudio.xyz</p>
       </div>
+    </div>
+  );
+}
+
+function Header({
+  showSwirls,
+  title,
+  author,
+}: {
+  showSwirls: boolean;
+  title: string;
+  author?: string;
+}) {
+  return (
+    <>
+      <h1 className="sheet-header">
+        {showSwirls && (
+          <img
+            src="images/black-swirl-divider.png"
+            className="swirl-divider"
+          ></img>
+        )}
+        <span>{title}</span>
+        {showSwirls && (
+          <img
+            src="images/black-swirl-divider.png"
+            className="swirl-divider flip"
+          ></img>
+        )}
+      </h1>
+      {author && <h2 className="sheet-author">by {author}</h2>}
+    </>
+  );
+}
+
+function Sidebar({ color }: { color: string }) {
+  return (
+    <div className="sidebar-container">
+      <div className="sidebar-background"></div>
+      <div className="sidebar-overlay" style={{ backgroundColor: color }}></div>
     </div>
   );
 }
