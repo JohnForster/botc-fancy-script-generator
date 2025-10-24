@@ -49,9 +49,3 @@
   background-size: 100mm;
   filter: drop-shadow(0.5mm 0.5mm black) drop-shadow(0mm 0mm 1mm black);
 }
-
-@media print {
-  .sheet-background {
-    background-size: 25mm;
-  }
-}

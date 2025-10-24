@@ -120,6 +120,12 @@ body {
   gap: 20px;
 }
 
+.print-warning {
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+}
+
 .upload-section {
   display: flex;
   justify-content: space-evenly;

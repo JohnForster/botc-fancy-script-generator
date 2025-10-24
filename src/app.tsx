@@ -293,6 +293,10 @@ export function App() {
                     >
                       Print
                     </button>
+                    <p className="print-warning">
+                      Print as PDF only tested on Chrome. Make sure that
+                      background graphics are enabled when saving as PDF.
+                    </p>
                   </div>
                 </div>
               </div>

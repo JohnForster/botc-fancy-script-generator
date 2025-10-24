@@ -321,9 +321,3 @@
   color: #222;
   padding-top: 0.5mm;
 }
-
-@media print {
-  .sidebar-background {
-    background-size: 25mm;
-  }
-}
