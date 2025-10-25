@@ -6,6 +6,7 @@ import {
   findJinxes,
   ParsedScript,
 } from "./utils/scriptParser";
+import { logUsage } from "./utils/logger";
 import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
 import exampleScript from "./data/example-script.json";
@@ -47,6 +48,9 @@ export function App() {
     if (parsed.metadata?.colour && typeof parsed.metadata.colour === "string") {
       setColor(parsed.metadata.colour);
     }
+
+    // Log usage
+    logUsage(parsed);
 
     setError(null);
   };
