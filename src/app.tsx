@@ -23,6 +23,7 @@ export function App() {
   const [includeMargins, setIncludeMargins] = useState(false);
   const [solidHeader, setSolidHeader] = useState(false);
   const [showBackingSheet, setShowBackingSheet] = useState(true);
+  const [iconScale, setIconScale] = useState(1.6);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
 
@@ -335,6 +336,31 @@ export function App() {
                         </span>
                       </label>
                     </div>
+
+                    <div className="slider-section">
+                      <label htmlFor="icon-scale" className="slider-label">
+                        Icon Scale: {iconScale.toFixed(1)}
+                      </label>
+                      <input
+                        id="icon-scale"
+                        type="range"
+                        min="0.5"
+                        max="3"
+                        step="0.1"
+                        value={iconScale}
+                        onInput={(e) =>
+                          setIconScale(
+                            parseFloat((e.target as HTMLInputElement).value)
+                          )
+                        }
+                        onChange={(e) =>
+                          setIconScale(
+                            parseFloat((e.target as HTMLInputElement).value)
+                          )
+                        }
+                        className="slider-input"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -410,6 +436,7 @@ export function App() {
               showSwirls={showSwirls}
               includeMargins={includeMargins}
               solidTitle={solidHeader}
+              iconScale={iconScale}
             />
 
             {showBackingSheet && (

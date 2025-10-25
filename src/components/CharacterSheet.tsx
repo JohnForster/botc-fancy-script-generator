@@ -13,6 +13,7 @@ interface CharacterSheetProps {
   showSwirls?: boolean;
   includeMargins?: boolean;
   solidTitle?: boolean;
+  iconScale?: number;
 }
 
 export function CharacterSheet({
@@ -24,6 +25,7 @@ export function CharacterSheet({
   showSwirls = true,
   includeMargins = false,
   solidTitle = false,
+  iconScale = 1.6,
 }: CharacterSheetProps) {
   const sections = [
     {
@@ -84,6 +86,7 @@ export function CharacterSheet({
                 characters={section.chars}
                 sidebarColor={color}
                 charNameColor={section.color}
+                iconScale={iconScale}
               />
               {i < sections.length - 1 && (
                 <img src="images/divider.png" className="section-divider" />
@@ -171,19 +174,21 @@ interface CharacterSectionProps {
   characters: ResolvedCharacter[];
   sidebarColor: string;
   charNameColor: string;
+  iconScale: number;
 }
 
 function CharacterSection({
   title,
   characters,
   charNameColor,
+  iconScale,
 }: CharacterSectionProps) {
   return (
     <div className="character-section">
       <h2 className="section-title">{title}</h2>
       <div className="character-list">
         {characters.map((char) => (
-          <CharacterCard key={char.id} character={char} color={charNameColor} />
+          <CharacterCard key={char.id} character={char} color={charNameColor} iconScale={iconScale} />
         ))}
         {characters.length % 2 === 1 && (
           <div className="character-column-spacer"></div>
@@ -196,9 +201,10 @@ function CharacterSection({
 interface CharacterCardProps {
   character: ResolvedCharacter;
   color: string;
+  iconScale: number;
 }
 
-function CharacterCard({ character, color }: CharacterCardProps) {
+function CharacterCard({ character, color, iconScale }: CharacterCardProps) {
   const getImageUrl = () => {
     // Prefer wiki_image for official characters
     if (character.wiki_image) {
@@ -238,9 +244,14 @@ function CharacterCard({ character, color }: CharacterCardProps) {
     <div className="character-card">
       <div className="character-icon-wrapper">
         {imageUrl ? (
-          <img src={imageUrl} alt={character.name} className="character-icon" />
+          <img
+            src={imageUrl}
+            alt={character.name}
+            className="character-icon"
+            style={{ scale: iconScale.toString() }}
+          />
         ) : (
-          <div className="character-icon-placeholder" style={{ color }}>
+          <div className="character-icon-placeholder" style={{ color, scale: iconScale.toString() }}>
             {character.name.charAt(0)}
           </div>
         )}

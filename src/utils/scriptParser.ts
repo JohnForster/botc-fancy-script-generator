@@ -7,6 +7,7 @@ import {
 } from "../types/schema";
 import { ALL_CHARACTERS } from "../data/all_characters";
 import jinxesData from "../data/jinxes.json";
+import { toTitleCase } from "./stringUtils";
 
 export interface ParsedScript {
   metadata: ScriptMetadata | null;
@@ -78,7 +79,7 @@ function resolveCustomCharacter(char: ScriptCharacter): ResolvedCharacter {
 
   return {
     id: char.id,
-    name: char.name,
+    name: toTitleCase(char.name),
     ability: char.ability,
     team: char.team,
     image,
