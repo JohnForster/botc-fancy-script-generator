@@ -1,6 +1,5 @@
 import {
   Script,
-  ScriptElement,
   ScriptCharacter,
   ScriptMetadata,
   ResolvedCharacter,
@@ -121,7 +120,10 @@ export interface Jinx {
   jinx: string;
 }
 
-export function findJinxes(characters: ResolvedCharacter[], script: Script): Jinx[] {
+export function findJinxes(
+  characters: ResolvedCharacter[],
+  script: Script
+): Jinx[] {
   const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
   const applicableJinxes: Jinx[] = [];
 
@@ -135,7 +137,11 @@ export function findJinxes(characters: ResolvedCharacter[], script: Script): Jin
 
   // Extract jinxes from custom characters in the script
   for (const element of script) {
-    if (typeof element === "object" && element !== null && "jinxes" in element) {
+    if (
+      typeof element === "object" &&
+      element !== null &&
+      "jinxes" in element
+    ) {
       const customChar = element as ScriptCharacter;
       const char1Id = customChar.id.toLowerCase();
 
