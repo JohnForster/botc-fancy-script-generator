@@ -48,31 +48,31 @@
 
 @font-face {
   font-family: Unlovable;
-  src: url("fonts/LHF Unlovable/LHF Unlovable.eot");
-  src: url("fonts/LHF Unlovable/LHF Unlovable.eot?#iefix")
+  src: url("/fonts/LHF Unlovable/LHF Unlovable.eot");
+  src: url("/fonts/LHF Unlovable/LHF Unlovable.eot?#iefix")
       format("embedded-opentype"),
-    url("fonts/LHF Unlovable/LHF Unlovable.woff") format("woff"),
-    url("fonts/LHF Unlovable/LHF Unlovable.woff2") format("woff2"),
-    url("fonts/LHF Unlovable/LHF Unlovable.ttf") format("truetype"),
-    url("fonts/LHF Unlovable/LHF Unlovable.svg#LHF Unlovable") format("svg");
+    url("/fonts/LHF Unlovable/LHF Unlovable.woff") format("woff"),
+    url("/fonts/LHF Unlovable/LHF Unlovable.woff2") format("woff2"),
+    url("/fonts/LHF Unlovable/LHF Unlovable.ttf") format("truetype"),
+    url("/fonts/LHF Unlovable/LHF Unlovable.svg#LHF Unlovable") format("svg");
 }
 
 @font-face {
   font-family: Trade Gothic;
-  src: url("fonts/Trade Gothic/Trade Gothic LT STD.otf");
+  src: url("/fonts/Trade Gothic/Trade Gothic LT STD.otf");
 }
 
 @font-face {
   font-family: Dumbledor;
-  src: url("fonts/Dumbledor/Dumbledor.ttf");
+  src: url("/fonts/Dumbledor/Dumbledor.ttf");
 }
 @font-face {
   font-family: Dumbledor Thin;
-  src: url("fonts/Dumbledor/DumbledorThin.ttf");
+  src: url("/fonts/Dumbledor/DumbledorThin.ttf");
 }
 @font-face {
   font-family: Dumbledor Wide;
-  src: url("fonts/Dumbledor/DumbledorWide.ttf");
+  src: url("/fonts/Dumbledor/DumbledorWide.ttf");
 }
 
 body {

@@ -2,7 +2,7 @@
   width: 210mm;
   min-height: 297mm; /* A4 height */
   max-height: 297mm; /* A4 height */
-  background-image: url(images/parchment_texture_a4_lightened.jpg);
+  background-image: url(/images/parchment_texture_a4_lightened.jpg);
   background-size: cover;
   position: relative;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -12,7 +12,7 @@
 }
 
 .sidebar-background {
-  background-image: url(images/sidebar-desaturated-small.jpg);
+  background-image: url(/images/sidebar-desaturated-small.jpg);
   background-size: 105mm;
   width: 15mm;
   height: 100%;

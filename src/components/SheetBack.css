@@ -9,7 +9,7 @@
   width: 210mm;
   min-height: 297mm; /* A4 height */
   max-height: 297mm; /* A4 height */
-  background-image: url(images/sidebar-desaturated-small.jpg);
+  background-image: url(/images/sidebar-desaturated-small.jpg);
   background-repeat: repeat;
   background-size: 105mm;
 
@@ -42,7 +42,7 @@
   text-align: center;
   padding: 20mm 0;
 
-  background-image: url(images/parchment_texture.jpg);
+  background-image: url(/images/parchment_texture.jpg);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;

@@ -89,13 +89,13 @@ export function CharacterSheet({
                 iconScale={iconScale}
               />
               {i < sections.length - 1 && (
-                <img src="images/divider.png" className="section-divider" />
+                <img src="/images/divider.png" className="section-divider" />
               )}
             </>
           ))}
           {jinxes.length > 0 && (
             <>
-              <img src="images/divider.png" className="section-divider" />
+              <img src="/images/divider.png" className="section-divider" />
               <JinxesSection
                 jinxes={jinxes}
                 allCharacters={[
@@ -137,7 +137,7 @@ function Header({
       <h1 className="sheet-header">
         {showSwirls && (
           <img
-            src="images/black-swirl-divider.png"
+            src="/images/black-swirl-divider.png"
             className="swirl-divider"
           ></img>
         )}
@@ -150,7 +150,7 @@ function Header({
         </span>
         {showSwirls && (
           <img
-            src="images/black-swirl-divider.png"
+            src="/images/black-swirl-divider.png"
             className="swirl-divider flip"
           ></img>
         )}
