@@ -186,7 +186,7 @@ export function App() {
 
   return (
     <div className="app">
-      <div className="controls">
+        <div className="controls">
         <h1 className="app-title">
           Blood on the Clocktower Fancy Script Generator
         </h1>
