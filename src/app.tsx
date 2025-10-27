@@ -25,6 +25,7 @@ export function App() {
   const [solidHeader, setSolidHeader] = useState(false);
   const [showBackingSheet, setShowBackingSheet] = useState(true);
   const [iconScale, setIconScale] = useState(1.6);
+  const [compactAppearance, setCompactAppearance] = useState(false);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
 
@@ -102,6 +103,15 @@ export function App() {
       document.removeEventListener("paste", handlePaste);
     };
   }, []); // Empty dependency array since loadScript is stable
+
+  // Auto-adjust icon scale when compact appearance is toggled
+  useEffect(() => {
+    if (compactAppearance) {
+      setIconScale(1.5);
+    } else {
+      setIconScale(1.6);
+    }
+  }, [compactAppearance]);
 
   const handleFileUpload = (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -315,6 +325,22 @@ export function App() {
                       <label className="toggle-label">
                         <input
                           type="checkbox"
+                          checked={compactAppearance}
+                          onChange={(e) =>
+                            setCompactAppearance(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">Compact Appearance</span>
+                      </label>
+                    </div>
+
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
                           checked={includeMargins}
                           onChange={(e) =>
                             setIncludeMargins(
@@ -413,6 +439,7 @@ export function App() {
                 </button>
               </div>
             </div>
+            {error && <div className="error-message">{error}</div>}
             <textarea
               className="script-editor-textarea"
               value={scriptText}
@@ -424,8 +451,6 @@ export function App() {
             />
           </div>
         )}
-
-        {error && <div className="error-message">{error}</div>}
       </div>
 
       {script && (
@@ -445,6 +470,7 @@ export function App() {
               includeMargins={includeMargins}
               solidTitle={solidHeader}
               iconScale={iconScale}
+              compactAppearance={compactAppearance}
             />
 
             {showBackingSheet && (

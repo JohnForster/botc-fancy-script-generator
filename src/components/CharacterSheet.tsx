@@ -14,6 +14,7 @@ interface CharacterSheetProps {
   includeMargins?: boolean;
   solidTitle?: boolean;
   iconScale?: number;
+  compactAppearance?: boolean;
 }
 
 export function CharacterSheet({
@@ -26,6 +27,7 @@ export function CharacterSheet({
   includeMargins = false,
   solidTitle = false,
   iconScale = 1.6,
+  compactAppearance = false,
 }: CharacterSheetProps) {
   const sections = [
     {
@@ -87,6 +89,7 @@ export function CharacterSheet({
                 sidebarColor={color}
                 charNameColor={section.color}
                 iconScale={iconScale}
+                compactAppearance={compactAppearance}
               />
               {i < sections.length - 1 && (
                 <img src="/images/divider.png" className="section-divider" />
@@ -175,6 +178,7 @@ interface CharacterSectionProps {
   sidebarColor: string;
   charNameColor: string;
   iconScale: number;
+  compactAppearance?: boolean;
 }
 
 function CharacterSection({
@@ -182,13 +186,14 @@ function CharacterSection({
   characters,
   charNameColor,
   iconScale,
+  compactAppearance = false,
 }: CharacterSectionProps) {
   return (
     <div className="character-section">
       <h2 className="section-title">{title}</h2>
       <div className="character-list">
         {characters.map((char) => (
-          <CharacterCard key={char.id} character={char} color={charNameColor} iconScale={iconScale} />
+          <CharacterCard key={char.id} character={char} color={charNameColor} iconScale={iconScale} compactAppearance={compactAppearance} />
         ))}
         {characters.length % 2 === 1 && (
           <div className="character-column-spacer"></div>
@@ -202,9 +207,10 @@ interface CharacterCardProps {
   character: ResolvedCharacter;
   color: string;
   iconScale: number;
+  compactAppearance?: boolean;
 }
 
-function CharacterCard({ character, color, iconScale }: CharacterCardProps) {
+function CharacterCard({ character, color, iconScale, compactAppearance = false }: CharacterCardProps) {
   const getImageUrl = () => {
     // Prefer wiki_image for official characters
     if (character.wiki_image) {
@@ -241,7 +247,7 @@ function CharacterCard({ character, color, iconScale }: CharacterCardProps) {
   const imageUrl = getImageUrl();
 
   return (
-    <div className="character-card">
+    <div className="character-card" style={{ marginBottom: compactAppearance ? '1mm' : undefined }}>
       <div className="character-icon-wrapper">
         {imageUrl ? (
           <img
