@@ -49,9 +49,6 @@ export function App() {
       setColor(parsed.metadata.colour);
     }
 
-    // Log usage
-    logUsage(parsed);
-
     setError(null);
   };
 
@@ -182,6 +179,13 @@ export function App() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+  };
+
+  const handlePrint = () => {
+    if (script) {
+      logUsage(script);
+    }
+    window.print();
   };
 
   return (
@@ -375,7 +379,7 @@ export function App() {
                       Sort Script
                     </button>
                     <button
-                      onClick={() => window.print()}
+                      onClick={handlePrint}
                       className="print-button"
                     >
                       Print
