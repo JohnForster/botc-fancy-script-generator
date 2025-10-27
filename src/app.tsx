@@ -114,6 +114,15 @@ export function App() {
     }
   }, [compactAppearance]);
 
+  // Update page title when script changes
+  useEffect(() => {
+    if (script?.metadata?.name) {
+      document.title = `${script.metadata.name} Fancy`;
+    } else {
+      document.title = "Blood on the Clocktower - Script PDF Maker";
+    }
+  }, [script?.metadata?.name]);
+
   const handleFileUpload = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
@@ -201,7 +210,7 @@ export function App() {
 
   return (
     <div className="app">
-        <div className="controls">
+      <div className="controls">
         <h1 className="app-title">
           Blood on the Clocktower Fancy Script Generator
         </h1>
@@ -421,10 +430,7 @@ export function App() {
                     <button onClick={handleSort} className="sort-button">
                       Sort Script
                     </button>
-                    <button
-                      onClick={handlePrint}
-                      className="print-button"
-                    >
+                    <button onClick={handlePrint} className="print-button">
                       Print
                     </button>
                     <p className="print-warning">
