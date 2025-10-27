@@ -20,6 +20,7 @@ export function App() {
   const [color, setColor] = useState("#137415");
   const [showAuthor, setShowAuthor] = useState(true);
   const [showJinxes, setShowJinxes] = useState(true);
+  const [useOldJinxes, setUseOldJinxes] = useState(false);
   const [showSwirls, setShowSwirls] = useState(true);
   const [includeMargins, setIncludeMargins] = useState(false);
   const [solidHeader, setSolidHeader] = useState(false);
@@ -293,6 +294,22 @@ export function App() {
                       <label className="toggle-label">
                         <input
                           type="checkbox"
+                          checked={useOldJinxes}
+                          onChange={(e) =>
+                            setUseOldJinxes(
+                              (e.target as HTMLInputElement).checked
+                            )
+                          }
+                          className="toggle-input"
+                        />
+                        <span className="toggle-text">Use Old Jinxes</span>
+                      </label>
+                    </div>
+
+                    <div className="toggle-section">
+                      <label className="toggle-label">
+                        <input
+                          type="checkbox"
                           checked={showSwirls}
                           onChange={(e) =>
                             setShowSwirls(
@@ -463,7 +480,7 @@ export function App() {
               color={color}
               jinxes={
                 showJinxes && rawScript
-                  ? findJinxes(script.characters, rawScript)
+                  ? findJinxes(script.characters, rawScript, useOldJinxes)
                   : []
               }
               showSwirls={showSwirls}

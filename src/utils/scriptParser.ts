@@ -118,11 +118,13 @@ export function groupCharactersByTeam(
 export interface Jinx {
   characters: [string, string];
   jinx: string;
+  oldJinx?: string;
 }
 
 export function findJinxes(
   characters: ResolvedCharacter[],
-  script: Script
+  script: Script,
+  useOldJinxes = false
 ): Jinx[] {
   const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
   const applicableJinxes: Jinx[] = [];
@@ -131,7 +133,18 @@ export function findJinxes(
   for (const jinx of jinxesData as Jinx[]) {
     const [char1, char2] = jinx.characters;
     if (characterIds.has(char1) && characterIds.has(char2)) {
-      applicableJinxes.push(jinx);
+      // If useOldJinxes is true and oldJinx exists, use it instead
+      if (useOldJinxes && jinx.oldJinx) {
+        applicableJinxes.push({
+          characters: jinx.characters,
+          jinx: jinx.oldJinx,
+        });
+      } else {
+        applicableJinxes.push({
+          characters: jinx.characters,
+          jinx: jinx.jinx,
+        });
+      }
     }
   }
 
