@@ -29,6 +29,11 @@ export function App() {
   const [compactAppearance, setCompactAppearance] = useState(false);
   const [isScriptSorted, setIsScriptSorted] = useState(true);
   const [scriptText, setScriptText] = useState("");
+  const [showPdfModal, setShowPdfModal] = useState(false);
+  const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   const checkIfSorted = (currentScript: Script): boolean => {
     try {
@@ -211,6 +216,13 @@ export function App() {
   const handleGeneratePDF = async () => {
     if (!rawScript || !script) return;
 
+    // Show modal and reset state
+    setShowPdfModal(true);
+    setPdfLoading(true);
+    setPdfBlob(null);
+    setPdfUrl(null);
+    setPdfError(null);
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_PDF_API_URL}/api/generate-pdf`,
@@ -245,22 +257,44 @@ export function App() {
 
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${script.metadata?.name || "script"}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      setPdfBlob(blob);
+      setPdfUrl(url);
+      setPdfLoading(false);
 
       if (script) {
         logUsage(script);
       }
     } catch (error) {
       console.error("Error generating PDF:", error);
-      alert(
+      setPdfError(
         "Failed to generate PDF. Please try the browser print option instead."
       );
+      setPdfLoading(false);
+    }
+  };
+
+  const handleDownloadPDF = () => {
+    if (!pdfBlob || !script) return;
+
+    const url = URL.createObjectURL(pdfBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${script.metadata?.name || "script"}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleClosePdfModal = () => {
+    setShowPdfModal(false);
+    setPdfBlob(null);
+    setPdfError(null);
+
+    // Clean up the blob URL
+    if (pdfUrl) {
+      URL.revokeObjectURL(pdfUrl);
+      setPdfUrl(null);
     }
   };
 
@@ -500,9 +534,8 @@ export function App() {
                       Browser Print (Fallback)
                     </button>
                     <p className="print-warning">
-                      "Generate PDF" creates a professional PDF via our server.
-                      Use "Browser Print" as a fallback if the server is
-                      unavailable.
+                      "Generate PDF" creates a PDF on our server. Use "Browser
+                      Print" as a fallback if the server is unavailable.
                     </p>
                   </div>
                 </div>
@@ -592,6 +625,91 @@ export function App() {
           <p className="placeholder-text">
             Upload a JSON script file or paste JSON anywhere on the page
           </p>
+        </div>
+      )}
+
+      {showPdfModal && (
+        <div className="modal-overlay" onClick={handleClosePdfModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            {pdfLoading && (
+              <>
+                <div className="modal-spinner"></div>
+                <h2 className="modal-title">Generating Script PDF</h2>
+                <p className="modal-text">This may take a minute...</p>
+              </>
+            )}
+
+            {!pdfLoading && pdfBlob && pdfUrl && (
+              <>
+                <svg
+                  className="modal-success-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <h2 className="modal-title">Script Ready!</h2>
+                <p className="modal-text">Script successfully PDFerised</p>
+
+                <div className="pdf-preview-container">
+                  <iframe
+                    src={pdfUrl}
+                    className="pdf-preview"
+                    title="PDF Preview"
+                  />
+                </div>
+
+                <div className="modal-buttons">
+                  <button
+                    onClick={handleDownloadPDF}
+                    className="modal-button modal-button-primary"
+                  >
+                    Download PDF
+                  </button>
+                  <button
+                    onClick={handleClosePdfModal}
+                    className="modal-button modal-button-secondary"
+                  >
+                    Close
+                  </button>
+                </div>
+              </>
+            )}
+
+            {!pdfLoading && pdfError && (
+              <>
+                <svg
+                  className="modal-error-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <h2 className="modal-title">Generation Failed</h2>
+                <p className="modal-text">{pdfError}</p>
+                <div className="modal-buttons">
+                  <button
+                    onClick={handleClosePdfModal}
+                    className="modal-button modal-button-secondary"
+                  >
+                    Close
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>

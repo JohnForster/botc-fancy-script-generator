@@ -31,3 +31,5 @@ CLAUDE.md
 # Copyrighted character images - DO NOT COMMIT
 public/character_icons/
 Jinxes.csv
+
+.env
