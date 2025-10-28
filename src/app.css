@@ -95,7 +95,12 @@ body {
 
 @font-face {
   font-family: Trade Gothic;
-  src: url("/fonts/Trade Gothic/Trade Gothic LT STD.otf");
+  src: url("/fonts/TradeGothic/TradeGothic.ttf");
+}
+
+@font-face {
+  font-family: Goudy Old Style;
+  src: url("/fonts/GoudyOldStyle/GoudyOldStyle.ttf");
 }
 
 @font-face {

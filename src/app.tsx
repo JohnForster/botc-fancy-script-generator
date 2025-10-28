@@ -208,6 +208,62 @@ export function App() {
     window.print();
   };
 
+  const handleGeneratePDF = async () => {
+    if (!rawScript || !script) return;
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_PDF_API_URL}/api/generate-pdf`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Origin: window.location.origin,
+          },
+          body: JSON.stringify({
+            script: rawScript,
+            options: {
+              color,
+              showAuthor,
+              showJinxes,
+              useOldJinxes,
+              showSwirls,
+              includeMargins,
+              solidTitle: solidHeader,
+              iconScale,
+              compactAppearance,
+              showBackingSheet,
+            },
+            filename: `${script.metadata?.name || "script"}.pdf`,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to generate PDF: ${response.statusText}`);
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${script.metadata?.name || "script"}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      if (script) {
+        logUsage(script);
+      }
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert(
+        "Failed to generate PDF. Please try the browser print option instead."
+      );
+    }
+  };
+
   return (
     <div className="app">
       <div className="controls">
@@ -430,12 +486,23 @@ export function App() {
                     <button onClick={handleSort} className="sort-button">
                       Sort Script
                     </button>
-                    <button onClick={handlePrint} className="print-button">
-                      Print
+                    <button
+                      onClick={handleGeneratePDF}
+                      className="print-button"
+                    >
+                      Generate PDF
+                    </button>
+                    <button
+                      onClick={handlePrint}
+                      className="print-button"
+                      style={{ marginTop: "8px" }}
+                    >
+                      Browser Print (Fallback)
                     </button>
                     <p className="print-warning">
-                      Print as PDF only tested on Chrome. Make sure that
-                      background graphics are enabled when saving as PDF.
+                      "Generate PDF" creates a professional PDF via our server.
+                      Use "Browser Print" as a fallback if the server is
+                      unavailable.
                     </p>
                   </div>
                 </div>

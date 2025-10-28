@@ -40,6 +40,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          VITE_PDF_API_URL: https://script-pdf-backend.vercel.app
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
