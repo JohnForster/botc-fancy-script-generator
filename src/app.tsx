@@ -1,175 +1,71 @@
 import { useState, useEffect } from "preact/hooks";
 import { CharacterSheet, SheetBack } from "botc-character-sheet";
 import "botc-character-sheet/style.css";
-import {
-  parseScript,
-  groupCharactersByTeam,
-  findJinxes,
-  ParsedScript,
-} from "./utils/scriptParser";
+import { groupCharactersByTeam, findJinxes } from "./utils/scriptParser";
 import { logUsage } from "./utils/logger";
-import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
 import exampleScript from "./data/example-script.json";
+import { useScriptLoader } from "./hooks/useScriptLoader";
+import { usePdfGeneration } from "./hooks/usePdfGeneration";
+import { ScriptControls } from "./components/ScriptControls";
+import { ScriptEditor } from "./components/ScriptEditor";
+import { PdfModal } from "./components/PdfModal";
+import { DEFAULT_OPTIONS, type ScriptOptions } from "./types/options";
 import "./app.css";
 
 export function App() {
-  const [script, setScript] = useState<ParsedScript | null>(null);
-  const [rawScript, setRawScript] = useState<Script | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [color, setColor] = useState("#137415");
-  const [showAuthor, setShowAuthor] = useState(true);
-  const [showJinxes, setShowJinxes] = useState(true);
-  const [useOldJinxes, setUseOldJinxes] = useState(false);
-  const [showSwirls, setShowSwirls] = useState(true);
-  const [includeMargins, setIncludeMargins] = useState(false);
-  const [solidHeader, setSolidHeader] = useState(false);
-  const [showBackingSheet, setShowBackingSheet] = useState(true);
-  const [iconScale, setIconScale] = useState(1.6);
-  const [compactAppearance, setCompactAppearance] = useState(false);
-  const [isScriptSorted, setIsScriptSorted] = useState(true);
-  const [scriptText, setScriptText] = useState("");
-  const [showPdfModal, setShowPdfModal] = useState(false);
-  const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
-  const [pdfLoading, setPdfLoading] = useState(false);
-  const [pdfError, setPdfError] = useState<string | null>(null);
+  const {
+    script,
+    rawScript,
+    error,
+    scriptText,
+    isScriptSorted,
+    loadScript,
+    handleScriptTextChange,
+    handleFileUpload,
+    handleSort,
+    handleSaveScript,
+    updateScriptMetadata,
+  } = useScriptLoader();
 
-  const checkIfSorted = (currentScript: Script): boolean => {
-    try {
-      const sorted = sortScript(currentScript);
-      return JSON.stringify(currentScript) === JSON.stringify(sorted);
-    } catch {
-      return true; // Assume sorted if we can't check
-    }
-  };
+  const {
+    showPdfModal,
+    pdfLoading,
+    pdfUrl,
+    pdfError,
+    generatePDF,
+    downloadPDF,
+    closePdfModal,
+  } = usePdfGeneration();
 
-  const loadScript = (json: Script) => {
-    setRawScript(json);
-    const parsed = parseScript(json);
-    setScript(parsed);
-    setScriptText(JSON.stringify(json, null, 2));
-    setIsScriptSorted(checkIfSorted(json));
-
-    // Load colour from metadata if present
-    if (parsed.metadata?.colour && typeof parsed.metadata.colour === "string") {
-      setColor(parsed.metadata.colour);
-    }
-
-    setError(null);
-  };
-
-  const handleScriptTextChange = (newText: string) => {
-    setScriptText(newText);
-
-    // Try to parse and update in real-time
-    try {
-      const json = JSON.parse(newText);
-      setRawScript(json);
-      const parsed = parseScript(json);
-      setScript(parsed);
-      setIsScriptSorted(checkIfSorted(json));
-
-      // Load colour from metadata if present
-      if (
-        parsed.metadata?.colour &&
-        typeof parsed.metadata.colour === "string"
-      ) {
-        setColor(parsed.metadata.colour);
-      }
-
-      setError(null);
-    } catch (err) {
-      // Keep the error state but don't block typing
-      setError(err instanceof Error ? err.message : "Invalid JSON format");
-    }
-  };
-
-  useEffect(() => {
-    const handlePaste = (event: ClipboardEvent) => {
-      // Get pasted text
-      const pastedText = event.clipboardData?.getData("text");
-      if (!pastedText) return;
-
-      // Try to parse as JSON
-      try {
-        const json = JSON.parse(pastedText);
-        loadScript(json);
-      } catch (err) {
-        // Ignore paste if it's not valid JSON - user might be pasting something else
-        console.log("Pasted content is not valid JSON, ignoring");
-      }
-    };
-
-    // Add paste event listener
-    document.addEventListener("paste", handlePaste);
-
-    // Cleanup
-    return () => {
-      document.removeEventListener("paste", handlePaste);
-    };
-  }, []); // Empty dependency array since loadScript is stable
+  const [options, setOptions] = useState<ScriptOptions>(DEFAULT_OPTIONS);
 
   // Auto-adjust icon scale when compact appearance is toggled
   useEffect(() => {
-    if (compactAppearance) {
-      setIconScale(1.5);
+    if (options.compactAppearance) {
+      setOptions((prev) => ({ ...prev, iconScale: 1.5 }));
     } else {
-      setIconScale(1.6);
+      setOptions((prev) => ({ ...prev, iconScale: 1.6 }));
     }
-  }, [compactAppearance]);
+  }, [options.compactAppearance]);
 
-  // Update page title when script changes
-  useEffect(() => {
-    if (script?.metadata?.name) {
-      document.title = `${script.metadata.name} Fancy`;
-    } else {
-      document.title = "Blood on the Clocktower - Script PDF Maker";
-    }
-  }, [script?.metadata?.name]);
-
-  const handleFileUpload = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    const file = target.files?.[0];
-
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const json = JSON.parse(e.target?.result as string);
-        loadScript(json);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to parse JSON");
-        setScript(null);
-        setRawScript(null);
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const handleSort = () => {
-    if (!rawScript) return;
-
-    try {
-      const sorted = sortScript(rawScript);
-      setRawScript(sorted);
-      const parsed = parseScript(sorted);
-      setScript(parsed);
-      setScriptText(JSON.stringify(sorted, null, 2));
-      setIsScriptSorted(true);
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to sort script");
-    }
+  const updateOption = <K extends keyof ScriptOptions>(
+    key: K,
+    value: ScriptOptions[K]
+  ) => {
+    setOptions((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleLoadExample = () => {
-    loadScript(exampleScript as Script);
+    const parsed = loadScript(exampleScript as Script);
+    // Load color from metadata if present
+    if (parsed?.metadata?.colour && typeof parsed.metadata.colour === "string") {
+      updateOption("color", parsed.metadata.colour);
+    }
   };
 
   const handleColorChange = (newColor: string) => {
-    setColor(newColor);
+    updateOption("color", newColor);
 
     // Update the colour in the script metadata
     if (!rawScript) return;
@@ -183,27 +79,15 @@ export function App() {
       return element;
     });
 
-    setRawScript(updatedScript);
-    setScriptText(JSON.stringify(updatedScript, null, 2));
+    updateScriptMetadata(updatedScript);
   };
 
-  const handleSaveScript = () => {
-    if (!rawScript) return;
-
-    // Get script name from metadata or use default
-    const scriptName = script?.metadata?.name || "custom-script";
-    const filename = `${scriptName.toLowerCase().replace(/\s+/g, "-")}.json`;
-
-    // Create blob and download
-    const blob = new Blob([scriptText], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+  const handleScriptChange = (newText: string) => {
+    const parsed = handleScriptTextChange(newText);
+    // Load color from metadata if present
+    if (parsed?.metadata?.colour && typeof parsed.metadata.colour === "string") {
+      updateOption("color", parsed.metadata.colour);
+    }
   };
 
   const handlePrint = () => {
@@ -213,366 +97,38 @@ export function App() {
     window.print();
   };
 
-  const handleGeneratePDF = async () => {
+  const handleGeneratePDF = () => {
     if (!rawScript || !script) return;
-
-    // Show modal and reset state
-    setShowPdfModal(true);
-    setPdfLoading(true);
-    setPdfBlob(null);
-    setPdfUrl(null);
-    setPdfError(null);
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_PDF_API_URL}/api/generate-pdf`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Origin: window.location.origin,
-          },
-          body: JSON.stringify({
-            script: rawScript,
-            options: {
-              color,
-              showAuthor,
-              showJinxes,
-              useOldJinxes,
-              showSwirls,
-              includeMargins,
-              solidTitle: solidHeader,
-              iconScale,
-              compactAppearance,
-              showBackingSheet,
-            },
-            filename: `${script.metadata?.name || "script"}.pdf`,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Failed to generate PDF: ${response.statusText}`);
-      }
-
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      setPdfBlob(blob);
-      setPdfUrl(url);
-      setPdfLoading(false);
-
-      if (script) {
-        logUsage(script);
-      }
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-      setPdfError(
-        "Failed to generate PDF. Please try the browser print option instead."
-      );
-      setPdfLoading(false);
-    }
+    generatePDF(rawScript, script, options);
   };
 
   const handleDownloadPDF = () => {
-    if (!pdfBlob || !script) return;
-
-    const url = URL.createObjectURL(pdfBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${script.metadata?.name || "script"}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  const handleClosePdfModal = () => {
-    setShowPdfModal(false);
-    setPdfBlob(null);
-    setPdfError(null);
-
-    // Clean up the blob URL
-    if (pdfUrl) {
-      URL.revokeObjectURL(pdfUrl);
-      setPdfUrl(null);
-    }
+    downloadPDF(script?.metadata?.name);
   };
 
   return (
     <div className="app">
       <div className="controls">
-        <h1 className="app-title">
-          Blood on the Clocktower Fancy Script Generator
-        </h1>
-
-        <div className="control-panel">
-          <div className="upload-section">
-            <label htmlFor="file-upload" className="upload-label">
-              Upload JSON
-            </label>
-            <input
-              id="file-upload"
-              type="file"
-              accept=".json"
-              onChange={handleFileUpload}
-              className="file-input"
-            />
-            <div className="or">or</div>
-            <div className="paste-hint">Paste directly with ctrl+V / ⌘+V</div>
-          </div>
-
-          {!script && (
-            <div className="example-section">
-              <button onClick={handleLoadExample} className="example-button">
-                Load Example Script
-              </button>
-            </div>
-          )}
-
-          {script && (
-            <>
-              <div className="controls-grid">
-                <div className="control-group">
-                  <label className="control-group-label">Appearance</label>
-                  <div className="control-group-content">
-                    <div className="color-picker-section">
-                      <label htmlFor="sidebar-color" className="color-label">
-                        Script Color:
-                      </label>
-                      <input
-                        id="sidebar-color"
-                        type="color"
-                        value={color}
-                        onInput={(e) =>
-                          handleColorChange(
-                            (e.target as HTMLInputElement).value
-                          )
-                        }
-                        onChange={(e) =>
-                          handleColorChange(
-                            (e.target as HTMLInputElement).value
-                          )
-                        }
-                        className="color-input"
-                      />
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={showAuthor}
-                          onChange={(e) =>
-                            setShowAuthor(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">Show Author</span>
-                      </label>
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={showJinxes}
-                          onChange={(e) =>
-                            setShowJinxes(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">Show Jinxes</span>
-                      </label>
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={useOldJinxes}
-                          onChange={(e) =>
-                            setUseOldJinxes(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">Use Old Jinxes</span>
-                      </label>
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={showSwirls}
-                          onChange={(e) =>
-                            setShowSwirls(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">Show Swirls</span>
-                      </label>
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={solidHeader}
-                          onChange={(e) =>
-                            setSolidHeader(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">Solid Title</span>
-                      </label>
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={compactAppearance}
-                          onChange={(e) =>
-                            setCompactAppearance(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">Compact Appearance</span>
-                      </label>
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={includeMargins}
-                          onChange={(e) =>
-                            setIncludeMargins(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">Include Margins</span>
-                      </label>
-                    </div>
-
-                    <div className="toggle-section">
-                      <label className="toggle-label">
-                        <input
-                          type="checkbox"
-                          checked={showBackingSheet}
-                          onChange={(e) =>
-                            setShowBackingSheet(
-                              (e.target as HTMLInputElement).checked
-                            )
-                          }
-                          className="toggle-input"
-                        />
-                        <span className="toggle-text">
-                          Include Backing Sheet
-                        </span>
-                      </label>
-                    </div>
-
-                    <div className="slider-section">
-                      <label htmlFor="icon-scale" className="slider-label">
-                        Icon Scale: {iconScale.toFixed(1)}
-                      </label>
-                      <input
-                        id="icon-scale"
-                        type="range"
-                        min="0.5"
-                        max="3"
-                        step="0.1"
-                        value={iconScale}
-                        onInput={(e) =>
-                          setIconScale(
-                            parseFloat((e.target as HTMLInputElement).value)
-                          )
-                        }
-                        onChange={(e) =>
-                          setIconScale(
-                            parseFloat((e.target as HTMLInputElement).value)
-                          )
-                        }
-                        className="slider-input"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="control-group">
-                  <label className="control-group-label">Actions</label>
-                  <div className="control-group-content">
-                    <button onClick={handleSort} className="sort-button">
-                      Sort Script
-                    </button>
-                    <button
-                      onClick={handleGeneratePDF}
-                      className="print-button"
-                    >
-                      Generate PDF
-                    </button>
-                    <button
-                      onClick={handlePrint}
-                      className="print-button"
-                      style={{ marginTop: "8px" }}
-                    >
-                      Browser Print (Fallback)
-                    </button>
-                    <p className="print-warning">
-                      "Generate PDF" creates a PDF on our server. Use "Browser
-                      Print" as a fallback if the server is unavailable.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-
-        {!isScriptSorted && script && (
-          <div className="warning-message">
-            <strong>⚠️ Script Not Sorted:</strong> This script doesn't follow
-            the official sorting order. Click "Sort Script" to fix this.
-          </div>
-        )}
+        <ScriptControls
+          hasScript={!!script}
+          options={options}
+          isScriptSorted={isScriptSorted}
+          onFileUpload={handleFileUpload}
+          onLoadExample={handleLoadExample}
+          onColorChange={handleColorChange}
+          onOptionChange={updateOption}
+          onSort={handleSort}
+          onGeneratePDF={handleGeneratePDF}
+          onPrint={handlePrint}
+        />
 
         {script && (
-          <div className="script-editor-section">
-            <div className="script-editor-header">
-              <label className="script-editor-label">Edit Script JSON:</label>
-              <div className="script-editor-buttons">
-                <button className="update-button">Update</button>
-                <button onClick={handleSaveScript} className="update-button">
-                  Save
-                </button>
-              </div>
-            </div>
-            {error && <div className="error-message">{error}</div>}
-            <textarea
-              className="script-editor-textarea"
-              value={scriptText}
-              onChange={(e) =>
-                handleScriptTextChange((e.target as HTMLTextAreaElement).value)
-              }
-              rows={20}
-              spellcheck={false}
-            />
-          </div>
+          <ScriptEditor
+            scriptText={scriptText}
+            error={error}
+            onScriptChange={handleScriptChange}
+            onSave={handleSaveScript}
+          />
         )}
       </div>
 
@@ -581,26 +137,26 @@ export function App() {
           <div className="sheet-wrapper">
             <CharacterSheet
               title={script.metadata?.name || "Custom Script"}
-              author={showAuthor ? script.metadata?.author : undefined}
+              author={options.showAuthor ? script.metadata?.author : undefined}
               characters={groupCharactersByTeam(script.characters)}
-              color={color}
+              color={options.color}
               jinxes={
-                showJinxes && rawScript
-                  ? findJinxes(script.characters, rawScript, useOldJinxes)
+                options.showJinxes && rawScript
+                  ? findJinxes(script.characters, rawScript, options.useOldJinxes)
                   : []
               }
-              showSwirls={showSwirls}
-              includeMargins={includeMargins}
-              solidTitle={solidHeader}
-              iconScale={iconScale}
-              compactAppearance={compactAppearance}
+              showSwirls={options.showSwirls}
+              includeMargins={options.includeMargins}
+              solidTitle={options.solidHeader}
+              iconScale={options.iconScale}
+              compactAppearance={options.compactAppearance}
             />
 
-            {showBackingSheet && (
+            {options.showBackingSheet && (
               <SheetBack
                 title={script.metadata?.name || "Custom Script"}
-                color={color}
-                includeMargins={includeMargins}
+                color={options.color}
+                includeMargins={options.includeMargins}
               />
             )}
           </div>
@@ -628,90 +184,14 @@ export function App() {
         </div>
       )}
 
-      {showPdfModal && (
-        <div className="modal-overlay" onClick={handleClosePdfModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            {pdfLoading && (
-              <>
-                <div className="modal-spinner"></div>
-                <h2 className="modal-title">Generating Script PDF</h2>
-                <p className="modal-text">This may take a minute...</p>
-              </>
-            )}
-
-            {!pdfLoading && pdfBlob && pdfUrl && (
-              <>
-                <svg
-                  className="modal-success-icon"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <h2 className="modal-title">Script Ready!</h2>
-                <p className="modal-text">Script successfully PDFerised</p>
-
-                <div className="pdf-preview-container">
-                  <iframe
-                    src={pdfUrl}
-                    className="pdf-preview"
-                    title="PDF Preview"
-                  />
-                </div>
-
-                <div className="modal-buttons">
-                  <button
-                    onClick={handleDownloadPDF}
-                    className="modal-button modal-button-primary"
-                  >
-                    Download PDF
-                  </button>
-                  <button
-                    onClick={handleClosePdfModal}
-                    className="modal-button modal-button-secondary"
-                  >
-                    Close
-                  </button>
-                </div>
-              </>
-            )}
-
-            {!pdfLoading && pdfError && (
-              <>
-                <svg
-                  className="modal-error-icon"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <h2 className="modal-title">Generation Failed</h2>
-                <p className="modal-text">{pdfError}</p>
-                <div className="modal-buttons">
-                  <button
-                    onClick={handleClosePdfModal}
-                    className="modal-button modal-button-secondary"
-                  >
-                    Close
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+      <PdfModal
+        isOpen={showPdfModal}
+        isLoading={pdfLoading}
+        pdfUrl={pdfUrl}
+        error={pdfError}
+        onClose={closePdfModal}
+        onDownload={handleDownloadPDF}
+      />
     </div>
   );
 }
