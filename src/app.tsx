@@ -1,5 +1,6 @@
 import { useState, useEffect } from "preact/hooks";
-import { CharacterSheet } from "./components/CharacterSheet";
+import { CharacterSheet, SheetBack } from "botc-character-sheet";
+import "botc-character-sheet/style.css";
 import {
   parseScript,
   groupCharactersByTeam,
@@ -11,7 +12,6 @@ import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
 import exampleScript from "./data/example-script.json";
 import "./app.css";
-import { SheetBack } from "./components/SheetBack";
 
 export function App() {
   const [script, setScript] = useState<ParsedScript | null>(null);

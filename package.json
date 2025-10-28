@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "botc-character-sheet": "^0.1.0",
     "botc-script-checker": "^0.0.11",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",

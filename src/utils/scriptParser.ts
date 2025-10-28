@@ -2,8 +2,8 @@ import {
   Script,
   ScriptCharacter,
   ScriptMetadata,
-  ResolvedCharacter,
 } from "../types/schema";
+import type { ResolvedCharacter, GroupedCharacters, Jinx } from "botc-character-sheet";
 import { ALL_CHARACTERS } from "../data/all_characters";
 import jinxesData from "../data/jinxes.json";
 import { toTitleCase } from "./stringUtils";
@@ -87,15 +87,6 @@ function resolveCustomCharacter(char: ScriptCharacter): ResolvedCharacter {
   };
 }
 
-export interface GroupedCharacters {
-  townsfolk: ResolvedCharacter[];
-  outsider: ResolvedCharacter[];
-  minion: ResolvedCharacter[];
-  demon: ResolvedCharacter[];
-  traveller: ResolvedCharacter[];
-  fabled: ResolvedCharacter[];
-}
-
 export function groupCharactersByTeam(
   characters: ResolvedCharacter[]
 ): GroupedCharacters {
@@ -113,12 +104,6 @@ export function groupCharactersByTeam(
   }
 
   return grouped;
-}
-
-export interface Jinx {
-  characters: [string, string];
-  jinx: string;
-  oldJinx?: string;
 }
 
 export function findJinxes(
