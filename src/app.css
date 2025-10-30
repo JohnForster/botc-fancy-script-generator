@@ -140,6 +140,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  align-items: center;
 }
 
 .control-panel {
@@ -352,6 +353,7 @@ body {
   gap: 8px;
   flex: 1;
   min-height: 0;
+  width: 100%;
 }
 
 .script-editor-header {

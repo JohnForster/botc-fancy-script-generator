@@ -60,6 +60,10 @@ export function ScriptControls({
 
         {hasScript && (
           <>
+            <p style={{ textAlign: "center", margin: 0 }}>
+              If you have any feedback, please let me know{" "}
+              <a href="https://forms.gle/z1yeAW7x91X4Uc4H8">here</a>.
+            </p>
             <div className="controls-grid">
               <div className="control-group">
                 <label className="control-group-label">Appearance</label>
@@ -214,9 +218,7 @@ export function ScriptControls({
                         }
                         className="toggle-input"
                       />
-                      <span className="toggle-text">
-                        Include Backing Sheet
-                      </span>
+                      <span className="toggle-text">Include Backing Sheet</span>
                     </label>
                   </div>
 
