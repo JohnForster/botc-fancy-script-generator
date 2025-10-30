@@ -2,7 +2,10 @@ import type { ParsedScript } from "./scriptParser";
 
 const FIREBASE_URL = "https://logusage-dvbaqkhwga-uc.a.run.app";
 
-export const logUsage = async (script: ParsedScript) => {
+export const logUsage = async (
+  script: ParsedScript,
+  other: { [key: string]: any } = {}
+) => {
   // Only log usage in production environment
   if (import.meta.env.DEV) {
     return;
@@ -15,6 +18,7 @@ export const logUsage = async (script: ParsedScript) => {
       title: script.metadata?.name || "Untitled",
       author: script.metadata?.author || "Unknown",
       characterCount: script.characters.length,
+      ...other,
     }),
     headers: {
       "x-password": "dungeon-mister",

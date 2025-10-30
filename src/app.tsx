@@ -59,7 +59,10 @@ export function App() {
   const handleLoadExample = () => {
     const parsed = loadScript(exampleScript as Script);
     // Load color from metadata if present
-    if (parsed?.metadata?.colour && typeof parsed.metadata.colour === "string") {
+    if (
+      parsed?.metadata?.colour &&
+      typeof parsed.metadata.colour === "string"
+    ) {
       updateOption("color", parsed.metadata.colour);
     }
   };
@@ -85,20 +88,26 @@ export function App() {
   const handleScriptChange = (newText: string) => {
     const parsed = handleScriptTextChange(newText);
     // Load color from metadata if present
-    if (parsed?.metadata?.colour && typeof parsed.metadata.colour === "string") {
+    if (
+      parsed?.metadata?.colour &&
+      typeof parsed.metadata.colour === "string"
+    ) {
       updateOption("color", parsed.metadata.colour);
     }
   };
 
   const handlePrint = () => {
     if (script) {
-      logUsage(script);
+      logUsage(script, { method: "print", options });
     }
     window.print();
   };
 
   const handleGeneratePDF = () => {
     if (!rawScript || !script) return;
+    if (script) {
+      logUsage(script, { method: "generate", options });
+    }
     generatePDF(rawScript, script, options);
   };
 
@@ -142,7 +151,11 @@ export function App() {
               color={options.color}
               jinxes={
                 options.showJinxes && rawScript
-                  ? findJinxes(script.characters, rawScript, options.useOldJinxes)
+                  ? findJinxes(
+                      script.characters,
+                      rawScript,
+                      options.useOldJinxes
+                    )
                   : []
               }
               showSwirls={options.showSwirls}
