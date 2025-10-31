@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "botc-character-sheet": "^0.6.0",
+    "botc-character-sheet": "^0.7.0",
     "botc-script-checker": "^0.0.11",
     "preact": "^10.19.3"
   },
