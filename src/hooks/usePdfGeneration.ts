@@ -1,5 +1,4 @@
 import { useState } from "preact/hooks";
-import { logUsage } from "../utils/logger";
 import type { ParsedScript } from "../utils/scriptParser";
 import type { Script } from "botc-script-checker";
 import type { ScriptOptions } from "../types/options";
