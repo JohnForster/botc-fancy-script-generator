@@ -60,8 +60,6 @@ export function usePdfGeneration() {
       setPdfBlob(blob);
       setPdfUrl(url);
       setPdfLoading(false);
-
-      logUsage(script);
     } catch (error) {
       console.error("Error generating PDF:", error);
       setPdfError(
