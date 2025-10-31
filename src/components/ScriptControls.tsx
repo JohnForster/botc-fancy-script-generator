@@ -1,4 +1,4 @@
-import type { ScriptOptions } from "../types/options";
+import { randomColor, type ScriptOptions } from "../types/options";
 
 interface ScriptControlsProps {
   hasScript: boolean;
@@ -70,7 +70,7 @@ export function ScriptControls({
                 <div className="control-group-content">
                   <div className="color-picker-section">
                     <label htmlFor="sidebar-color" className="color-label">
-                      Script Color:
+                      Change Script Colour:
                     </label>
                     <input
                       id="sidebar-color"
@@ -85,6 +85,12 @@ export function ScriptControls({
                       className="color-input"
                     />
                   </div>
+                  <button
+                    onClick={() => onColorChange(randomColor())}
+                    className="update-button"
+                  >
+                    Randomise
+                  </button>
 
                   <div className="toggle-section">
                     <label className="toggle-label">
