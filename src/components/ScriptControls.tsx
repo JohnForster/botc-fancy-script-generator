@@ -164,10 +164,10 @@ export function ScriptControls({
                     <label className="toggle-label">
                       <input
                         type="checkbox"
-                        checked={options.solidHeader}
+                        checked={options.solidTitle}
                         onChange={(e) =>
                           onOptionChange(
-                            "solidHeader",
+                            "solidTitle",
                             (e.target as HTMLInputElement).checked
                           )
                         }

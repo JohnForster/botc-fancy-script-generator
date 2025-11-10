@@ -163,7 +163,7 @@ export function App() {
               }
               showSwirls={options.showSwirls}
               includeMargins={options.includeMargins}
-              solidTitle={options.solidHeader}
+              solidTitle={options.solidTitle}
               iconScale={options.iconScale}
               compactAppearance={options.compactAppearance}
             />

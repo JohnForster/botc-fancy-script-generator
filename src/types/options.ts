@@ -5,7 +5,7 @@ export interface ScriptOptions {
   useOldJinxes: boolean;
   showSwirls: boolean;
   includeMargins: boolean;
-  solidHeader: boolean;
+  solidTitle: boolean;
   compactAppearance: boolean;
   showBackingSheet: boolean;
   iconScale: number;
@@ -36,7 +36,7 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   useOldJinxes: false,
   showSwirls: true,
   includeMargins: false,
-  solidHeader: false,
+  solidTitle: false,
   compactAppearance: false,
   showBackingSheet: true,
   iconScale: 1.6,

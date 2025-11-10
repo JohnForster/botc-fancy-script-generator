@@ -1,7 +1,16 @@
 import { useState } from "preact/hooks";
 import type { ParsedScript } from "../utils/scriptParser";
-import type { Script } from "botc-script-checker";
+import type {
+  BloodOnTheClocktowerCustomScript,
+  Script,
+} from "botc-script-checker";
 import type { ScriptOptions } from "../types/options";
+
+type Payload = {
+  script: BloodOnTheClocktowerCustomScript;
+  options: ScriptOptions;
+  filename: string;
+};
 
 export function usePdfGeneration() {
   const [showPdfModal, setShowPdfModal] = useState(false);
@@ -22,6 +31,12 @@ export function usePdfGeneration() {
     setPdfUrl(null);
     setPdfError(null);
 
+    const payload: Payload = {
+      script: rawScript,
+      options,
+      filename: `${script.metadata?.name || "script"}.pdf`,
+    };
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_PDF_API_URL}/api/generate-pdf`,
@@ -31,22 +46,7 @@ export function usePdfGeneration() {
             "Content-Type": "application/json",
             Origin: window.location.origin,
           },
-          body: JSON.stringify({
-            script: rawScript,
-            options: {
-              color: options.color,
-              showAuthor: options.showAuthor,
-              showJinxes: options.showJinxes,
-              useOldJinxes: options.useOldJinxes,
-              showSwirls: options.showSwirls,
-              includeMargins: options.includeMargins,
-              solidTitle: options.solidHeader,
-              iconScale: options.iconScale,
-              compactAppearance: options.compactAppearance,
-              showBackingSheet: options.showBackingSheet,
-            },
-            filename: `${script.metadata?.name || "script"}.pdf`,
-          }),
+          body: JSON.stringify(payload),
         }
       );
 
