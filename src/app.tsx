@@ -109,7 +109,7 @@ export function App() {
     if (script) {
       logUsage(script, { method: "generate", options });
     }
-    generatePDF(rawScript, script, options);
+    generatePDF(rawScript, script, options, nightOrders);
   };
 
   const handleDownloadPDF = () => {

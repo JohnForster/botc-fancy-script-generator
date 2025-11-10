@@ -5,10 +5,12 @@ import type {
   Script,
 } from "botc-script-checker";
 import type { ScriptOptions } from "../types/options";
+import { NightOrders } from "./useScriptLoader";
 
 type Payload = {
   script: BloodOnTheClocktowerCustomScript;
   options: ScriptOptions;
+  nightOrders: NightOrders;
   filename: string;
 };
 
@@ -22,7 +24,8 @@ export function usePdfGeneration() {
   const generatePDF = async (
     rawScript: Script,
     script: ParsedScript,
-    options: ScriptOptions
+    options: ScriptOptions,
+    nightOrders: NightOrders
   ) => {
     // Show modal and reset state
     setShowPdfModal(true);
@@ -34,6 +37,7 @@ export function usePdfGeneration() {
     const payload: Payload = {
       script: rawScript,
       options,
+      nightOrders,
       filename: `${script.metadata?.name || "script"}.pdf`,
     };
 
