@@ -1,16 +1,21 @@
 import {
-  Script,
-  ScriptCharacter,
-  ScriptMetadata,
-} from "../types/schema";
-import type { ResolvedCharacter, GroupedCharacters, Jinx } from "botc-character-sheet";
+  ResolvedCharacter,
+  GroupedCharacters,
+  Jinx,
+} from "botc-character-sheet";
 import { ALL_CHARACTERS } from "../data/all_characters";
 import jinxesData from "../data/jinxes.json";
 import { toTitleCase } from "./stringUtils";
+import {
+  ScriptMetadata,
+  Script,
+  ScriptCharacter,
+  SetOfCharacterIconURLs,
+} from "botc-script-checker";
 
 export interface ParsedScript {
   metadata: ScriptMetadata | null;
-  characters: ResolvedCharacter[];
+  characters: ScriptCharacter[];
 }
 
 export function parseScript(json: unknown): ParsedScript {
@@ -20,7 +25,7 @@ export function parseScript(json: unknown): ParsedScript {
 
   const script = json as Script;
   let metadata: ScriptMetadata | null = null;
-  const characters: ResolvedCharacter[] = [];
+  const characters: ScriptCharacter[] = [];
 
   for (const element of script) {
     if (typeof element === "string") {
@@ -81,7 +86,7 @@ function resolveCustomCharacter(char: ScriptCharacter): ResolvedCharacter {
     name: toTitleCase(char.name),
     ability: char.ability,
     team: char.team,
-    image,
+    image: image as string | SetOfCharacterIconURLs | undefined,
     edition: char.edition,
     isCustom: true,
   };

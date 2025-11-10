@@ -4,8 +4,8 @@
     "": {
       "name": "script-pdf-maker",
       "dependencies": {
-        "botc-character-sheet": "^0.7.0",
-        "botc-script-checker": "^0.0.11",
+        "botc-character-sheet": "0.8.1",
+        "botc-script-checker": "^0.1.0",
         "preact": "^10.19.3",
       },
       "devDependencies": {
@@ -184,9 +184,9 @@
 
     "boolbase": ["boolbase@1.0.0", "", {}, "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww=="],
 
-    "botc-character-sheet": ["botc-character-sheet@0.7.0", "", { "peerDependencies": { "preact": "^10.19.3" } }, "sha512-px8DgbNIeNQ56PkSRbK7bPAFmsD0DHby6zkeOtSmQh2IasyTzWjkL/FD39bhiuwaDldbMimJZj88dyb8IOvolQ=="],
+    "botc-character-sheet": ["botc-character-sheet@0.8.1", "", { "dependencies": { "botc-script-checker": "^0.1.1" }, "peerDependencies": { "preact": "^10.19.3" } }, "sha512-IgVxIvuRdRmcYvC3cBZTzpPL+p0d2myRteaAEc9pk/wSEAdaebXxUjR5Lsf9JlkDX756oXYks+G6BlR/RxIC+g=="],
 
-    "botc-script-checker": ["botc-script-checker@0.0.11", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-UB05CcQGj5witWWSyFVapa4tFfgkAXc7t10I/5Hhgo3stwJpdjaf3+/hHp+9ac9JFmKlaGcuHsGzqIFSAmwWjg=="],
+    "botc-script-checker": ["botc-script-checker@0.1.0", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-cKP1oKFO+iTbud0cIRTPCq3BXBP6xJeHwIWJUZZO8q5X/ZjqQFOr22IMOxgvp8mrOgCrZxIgLqOkEqMwOSKaFA=="],
 
     "browserslist": ["browserslist@4.27.0", "", { "dependencies": { "baseline-browser-mapping": "^2.8.19", "caniuse-lite": "^1.0.30001751", "electron-to-chromium": "^1.5.238", "node-releases": "^2.0.26", "update-browserslist-db": "^1.1.4" }, "bin": { "browserslist": "cli.js" } }, "sha512-AXVQwdhot1eqLihwasPElhX2tAZiBjWdJ9i/Zcj2S6QYIjkx62OKSfnobkriB81C3l4w0rVy3Nt4jaTBltYEpw=="],
 
@@ -281,5 +281,7 @@
     "yallist": ["yallist@3.1.1", "", {}, "sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g=="],
 
     "@rollup/pluginutils/picomatch": ["picomatch@2.3.1", "", {}, "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="],
+
+    "botc-character-sheet/botc-script-checker": ["botc-script-checker@0.1.1", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-R9qqT+nRb4en05w25FKe6pshccYva6m1s18WCzeLvu5CmoJGKSXC2YrqsGjtyxjzgRL38Bdc/PcsS9VQ1p/+6w=="],
   }
 }

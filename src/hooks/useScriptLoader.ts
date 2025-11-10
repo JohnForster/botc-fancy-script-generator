@@ -2,6 +2,13 @@ import { useState, useEffect } from "preact/hooks";
 import { parseScript, type ParsedScript } from "../utils/scriptParser";
 import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
+import { nightOrders } from "botc-script-checker/src/data/nightOrders";
+import { NightOrderEntry } from "botc-character-sheet";
+
+export interface NightOrders {
+  first: NightOrderEntry[];
+  other: NightOrderEntry[];
+}
 
 export function useScriptLoader() {
   const [script, setScript] = useState<ParsedScript | null>(null);
@@ -9,6 +16,10 @@ export function useScriptLoader() {
   const [error, setError] = useState<string | null>(null);
   const [scriptText, setScriptText] = useState("");
   const [isScriptSorted, setIsScriptSorted] = useState(true);
+  const [nightOrdersState, setNightOrdersState] = useState<NightOrders>({
+    first: [],
+    other: [],
+  });
 
   const checkIfSorted = (currentScript: Script): boolean => {
     try {
@@ -19,12 +30,104 @@ export function useScriptLoader() {
     }
   };
 
+  const calculateNightOrders = (
+    parsedScript: ParsedScript,
+    rawScriptData: Script
+  ): NightOrders => {
+    // Create a map from the raw script to get firstNight/otherNight values for custom characters
+    const rawCharMap = new Map<
+      string,
+      { firstNight?: number; otherNight?: number }
+    >();
+    for (const element of rawScriptData) {
+      if (
+        typeof element === "object" &&
+        element !== null &&
+        "id" in element &&
+        element.id !== "_meta"
+      ) {
+        const char = element as any;
+        if (char.firstNight !== undefined || char.otherNight !== undefined) {
+          rawCharMap.set(char.id.toLowerCase(), {
+            firstNight: char.firstNight,
+            otherNight: char.otherNight,
+          });
+        }
+      }
+    }
+
+    // Helper to get position of a character or marker
+    const getPosition = (
+      entry: NightOrderEntry,
+      nightType: "firstNight" | "otherNight",
+      orderList: string[]
+    ): number => {
+      const id = typeof entry === "string" ? entry : entry.id;
+      const officialIndex = orderList.indexOf(id);
+
+      if (officialIndex !== -1) {
+        return officialIndex;
+      }
+
+      // Check if it's a custom character with a numeric position
+      const customData = rawCharMap.get(id);
+      const customValue =
+        nightType === "firstNight"
+          ? customData?.firstNight
+          : customData?.otherNight;
+
+      if (customValue !== undefined && customValue > 0) {
+        return customValue;
+      }
+
+      return Infinity; // Characters without night actions go to the end
+    };
+
+    // Build night order with characters and markers
+    const buildNightOrder = (
+      characters: NightOrderEntry[],
+      nightType: "firstNight" | "otherNight"
+    ): NightOrderEntry[] => {
+      const orderList =
+        nightType === "firstNight"
+          ? nightOrders.firstNight
+          : nightOrders.otherNight;
+
+      // Filter characters that have actions for this night
+      const activeChars = characters.filter((char) => {
+        const position = getPosition(char, nightType, orderList);
+        return position !== Infinity;
+      });
+
+      const charsAndMarkers: NightOrderEntry[] =
+        nightType === "firstNight"
+          ? [...activeChars, "dawn", "dusk", "minioninfo", "demoninfo"]
+          : [...activeChars, "dawn", "dusk"];
+
+      // Sort characters by position
+      charsAndMarkers.sort((a, b) => {
+        return (
+          getPosition(a, nightType, orderList) -
+          getPosition(b, nightType, orderList)
+        );
+      });
+
+      return charsAndMarkers;
+    };
+
+    return {
+      first: buildNightOrder(parsedScript.characters, "firstNight"),
+      other: buildNightOrder(parsedScript.characters, "otherNight"),
+    };
+  };
+
   const loadScript = (json: Script) => {
     setRawScript(json);
     const parsed = parseScript(json);
     setScript(parsed);
     setScriptText(JSON.stringify(json, null, 2));
     setIsScriptSorted(checkIfSorted(json));
+    setNightOrdersState(calculateNightOrders(parsed, json));
     setError(null);
 
     return parsed; // Return parsed script for color loading
@@ -40,6 +143,7 @@ export function useScriptLoader() {
       const parsed = parseScript(json);
       setScript(parsed);
       setIsScriptSorted(checkIfSorted(json));
+      setNightOrdersState(calculateNightOrders(parsed, json));
       setError(null);
 
       return parsed; // Return parsed script for color loading
@@ -80,6 +184,7 @@ export function useScriptLoader() {
       setScript(parsed);
       setScriptText(JSON.stringify(sorted, null, 2));
       setIsScriptSorted(true);
+      setNightOrdersState(calculateNightOrders(parsed, sorted));
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to sort script");
@@ -146,6 +251,7 @@ export function useScriptLoader() {
     error,
     scriptText,
     isScriptSorted,
+    nightOrders: nightOrdersState,
     loadScript,
     handleScriptTextChange,
     handleFileUpload,

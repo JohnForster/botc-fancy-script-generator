@@ -9,6 +9,8 @@ export interface ScriptOptions {
   compactAppearance: boolean;
   showBackingSheet: boolean;
   iconScale: number;
+  formatMinorWords: boolean;
+  displayNightOrder: boolean;
 }
 
 export const randomColor = () => {
@@ -38,4 +40,6 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   compactAppearance: false,
   showBackingSheet: true,
   iconScale: 1.6,
+  formatMinorWords: false,
+  displayNightOrder: false,
 };

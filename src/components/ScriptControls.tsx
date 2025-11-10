@@ -228,6 +228,42 @@ export function ScriptControls({
                     </label>
                   </div>
 
+                  <div className="toggle-section">
+                    <label className="toggle-label">
+                      <input
+                        type="checkbox"
+                        checked={options.displayNightOrder}
+                        onChange={(e) =>
+                          onOptionChange(
+                            "displayNightOrder",
+                            (e.target as HTMLInputElement).checked
+                          )
+                        }
+                        className="toggle-input"
+                      />
+                      <span className="toggle-text">
+                        Backing Sheet Night Order
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="toggle-section">
+                    <label className="toggle-label">
+                      <input
+                        type="checkbox"
+                        checked={options.formatMinorWords}
+                        onChange={(e) =>
+                          onOptionChange(
+                            "formatMinorWords",
+                            (e.target as HTMLInputElement).checked
+                          )
+                        }
+                        className="toggle-input"
+                      />
+                      <span className="toggle-text">Shrink Minor Words</span>
+                    </label>
+                  </div>
+
                   <div className="slider-section">
                     <label htmlFor="icon-scale" className="slider-label">
                       Icon Scale: {options.iconScale.toFixed(1)}

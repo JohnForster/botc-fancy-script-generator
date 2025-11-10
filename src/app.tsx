@@ -20,6 +20,7 @@ export function App() {
     error,
     scriptText,
     isScriptSorted,
+    nightOrders, // Available for future use - contains first/other night characters
     loadScript,
     handleScriptTextChange,
     handleFileUpload,
@@ -172,6 +173,10 @@ export function App() {
                 title={script.metadata?.name || "Custom Script"}
                 color={options.color}
                 includeMargins={options.includeMargins}
+                firstNightOrder={nightOrders.first}
+                otherNightOrder={nightOrders.other}
+                formatMinorWords={options.formatMinorWords}
+                displayNightOrder={options.displayNightOrder}
               />
             )}
           </div>
