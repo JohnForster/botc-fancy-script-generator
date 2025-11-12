@@ -6,7 +6,7 @@ export interface ScriptOptions {
   showSwirls: boolean;
   includeMargins: boolean;
   solidTitle: boolean;
-  compactAppearance: boolean;
+  appearance: "normal" | "compact" | "super-compact";
   showBackingSheet: boolean;
   iconScale: number;
   formatMinorWords: boolean;
@@ -37,7 +37,7 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   showSwirls: true,
   includeMargins: false,
   solidTitle: false,
-  compactAppearance: false,
+  appearance: "normal",
   showBackingSheet: true,
   iconScale: 1.6,
   formatMinorWords: false,

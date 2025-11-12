@@ -94,6 +94,29 @@ export function ScriptControls({
 
                   <div className="toggle-section">
                     <label className="toggle-label">
+                      <span className="toggle-text">Appearance:</span>
+                      <select
+                        value={options.appearance}
+                        onChange={(e) =>
+                          onOptionChange(
+                            "appearance",
+                            (e.target as HTMLSelectElement).value as
+                              | "normal"
+                              | "compact"
+                              | "super-compact"
+                          )
+                        }
+                        className="toggle-input"
+                      >
+                        <option value="normal">Normal</option>
+                        <option value="compact">Compact</option>
+                        <option value="super-compact">Super Compact</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <div className="toggle-section">
+                    <label className="toggle-label">
                       <input
                         type="checkbox"
                         checked={options.showAuthor}
@@ -174,23 +197,6 @@ export function ScriptControls({
                         className="toggle-input"
                       />
                       <span className="toggle-text">Solid Title</span>
-                    </label>
-                  </div>
-
-                  <div className="toggle-section">
-                    <label className="toggle-label">
-                      <input
-                        type="checkbox"
-                        checked={options.compactAppearance}
-                        onChange={(e) =>
-                          onOptionChange(
-                            "compactAppearance",
-                            (e.target as HTMLInputElement).checked
-                          )
-                        }
-                        className="toggle-input"
-                      />
-                      <span className="toggle-text">Compact Appearance</span>
                     </label>
                   </div>
 

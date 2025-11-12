@@ -41,14 +41,16 @@ export function App() {
 
   const [options, setOptions] = useState<ScriptOptions>(DEFAULT_OPTIONS);
 
-  // Auto-adjust icon scale when compact appearance is toggled
+  // Auto-adjust icon scale when appearance changes
   useEffect(() => {
-    if (options.compactAppearance) {
+    if (options.appearance === "compact") {
       setOptions((prev) => ({ ...prev, iconScale: 1.5 }));
+    } else if (options.appearance === "super-compact") {
+      setOptions((prev) => ({ ...prev, iconScale: 1.4 }));
     } else {
       setOptions((prev) => ({ ...prev, iconScale: 1.6 }));
     }
-  }, [options.compactAppearance]);
+  }, [options.appearance]);
 
   const updateOption = <K extends keyof ScriptOptions>(
     key: K,
@@ -165,7 +167,7 @@ export function App() {
               includeMargins={options.includeMargins}
               solidTitle={options.solidTitle}
               iconScale={options.iconScale}
-              compactAppearance={options.compactAppearance}
+              appearance={options.appearance}
             />
 
             {options.showBackingSheet && (
