@@ -1,7 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
-import { CharacterSheet, SheetBack, NightSheet } from "botc-character-sheet";
 import "botc-character-sheet/style.css";
-import { groupCharactersByTeam, findJinxes } from "./utils/scriptParser";
 import { logUsage } from "./utils/logger";
 import type { Script } from "botc-script-checker";
 import exampleScript from "./data/example-script.json";
@@ -10,8 +8,9 @@ import { usePdfGeneration } from "./hooks/usePdfGeneration";
 import { ScriptControls } from "./components/ScriptControls";
 import { ScriptEditor } from "./components/ScriptEditor";
 import { PdfModal } from "./components/PdfModal";
-import { DEFAULT_OPTIONS, type ScriptOptions } from "./types/options";
+import { DEFAULT_OPTIONS } from "./types/options";
 import "./app.css";
+import { ScriptOptions, FancyDoc } from "botc-character-sheet";
 
 export function App() {
   const {
@@ -148,50 +147,11 @@ export function App() {
 
       {script && (
         <div className="preview-section">
-          <div className="sheet-wrapper">
-            <CharacterSheet
-              title={script.metadata?.name || "Custom Script"}
-              author={options.showAuthor ? script.metadata?.author : undefined}
-              characters={groupCharactersByTeam(script.characters)}
-              color={options.color}
-              jinxes={
-                options.showJinxes && rawScript
-                  ? findJinxes(
-                      script.characters,
-                      rawScript,
-                      options.useOldJinxes
-                    )
-                  : []
-              }
-              showSwirls={options.showSwirls}
-              includeMargins={options.includeMargins}
-              solidTitle={options.solidTitle}
-              iconScale={options.iconScale}
-              appearance={options.appearance}
-            />
-
-            {options.showBackingSheet && (
-              <SheetBack
-                title={script.metadata?.name || "Custom Script"}
-                color={options.color}
-                includeMargins={options.includeMargins}
-                firstNightOrder={nightOrders.first}
-                otherNightOrder={nightOrders.other}
-                formatMinorWords={options.formatMinorWords}
-                displayNightOrder={options.displayNightOrder}
-              />
-            )}
-
-            {options.showNightSheet && (
-              <NightSheet
-                firstNightOrder={nightOrders.first}
-                otherNightOrder={nightOrders.other}
-                includeMargins={options.includeMargins}
-                title={script.metadata?.name || "Custom Script"}
-                color={options.color}
-              />
-            )}
-          </div>
+          <FancyDoc
+            script={script}
+            options={options}
+            nightOrders={nightOrders}
+          />
         </div>
       )}
 

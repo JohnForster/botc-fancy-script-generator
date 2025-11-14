@@ -1,22 +1,7 @@
-import {
-  ResolvedCharacter,
-  GroupedCharacters,
-  Jinx,
-} from "botc-character-sheet";
+import { ParsedScript, ResolvedCharacter } from "botc-character-sheet";
 import { ALL_CHARACTERS } from "../data/all_characters";
-import jinxesData from "../data/jinxes.json";
 import { toTitleCase } from "./stringUtils";
-import {
-  ScriptMetadata,
-  Script,
-  ScriptCharacter,
-  SetOfCharacterIconURLs,
-} from "botc-script-checker";
-
-export interface ParsedScript {
-  metadata: ScriptMetadata | null;
-  characters: ScriptCharacter[];
-}
+import { ScriptMetadata, Script, ScriptCharacter } from "botc-script-checker";
 
 export function parseScript(json: unknown): ParsedScript {
   if (!Array.isArray(json)) {
@@ -71,108 +56,9 @@ function resolveOfficialCharacter(id: string): ResolvedCharacter | null {
 }
 
 function resolveCustomCharacter(char: ScriptCharacter): ResolvedCharacter {
-  let image: string | string[] | undefined;
-
-  if (char.image) {
-    if (typeof char.image === "string") {
-      image = char.image;
-    } else if (Array.isArray(char.image)) {
-      image = char.image;
-    }
-  }
-
   return {
-    id: char.id,
+    ...char,
     name: toTitleCase(char.name),
-    ability: char.ability,
-    team: char.team,
-    image: image as string | SetOfCharacterIconURLs | undefined,
-    edition: char.edition,
     isCustom: true,
   };
-}
-
-export function groupCharactersByTeam(
-  characters: ResolvedCharacter[]
-): GroupedCharacters {
-  const grouped: GroupedCharacters = {
-    townsfolk: [],
-    outsider: [],
-    minion: [],
-    demon: [],
-    traveller: [],
-    fabled: [],
-  };
-
-  for (const char of characters) {
-    grouped[char.team].push(char);
-  }
-
-  return grouped;
-}
-
-export function findJinxes(
-  characters: ResolvedCharacter[],
-  script: Script,
-  useOldJinxes = false
-): Jinx[] {
-  const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
-  const applicableJinxes: Jinx[] = [];
-
-  // Add global jinxes from jinxes.json
-  for (const jinx of jinxesData as Jinx[]) {
-    const [char1, char2] = jinx.characters;
-    if (characterIds.has(char1) && characterIds.has(char2)) {
-      // If useOldJinxes is true and oldJinx exists, use it instead
-      if (useOldJinxes && jinx.oldJinx) {
-        applicableJinxes.push({
-          characters: jinx.characters,
-          jinx: jinx.oldJinx,
-        });
-      } else {
-        applicableJinxes.push({
-          characters: jinx.characters,
-          jinx: jinx.jinx,
-        });
-      }
-    }
-  }
-
-  // Extract jinxes from custom characters in the script
-  for (const element of script) {
-    if (
-      typeof element === "object" &&
-      element !== null &&
-      "jinxes" in element
-    ) {
-      const customChar = element as ScriptCharacter;
-      const char1Id = customChar.id.toLowerCase();
-
-      // Only process if this character is in the script
-      if (characterIds.has(char1Id) && customChar.jinxes) {
-        for (const jinxPair of customChar.jinxes) {
-          const char2Id = jinxPair.id.toLowerCase();
-
-          // Only add if both characters are in the script
-          if (characterIds.has(char2Id)) {
-            // Check if this jinx already exists (to avoid duplicates)
-            const exists = applicableJinxes.some(
-              (j) =>
-                (j.characters[0] === char1Id && j.characters[1] === char2Id) ||
-                (j.characters[0] === char2Id && j.characters[1] === char1Id)
-            );
-
-            if (!exists) {
-              applicableJinxes.push({
-                characters: [char1Id, char2Id],
-                jinx: jinxPair.reason,
-              });
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return applicableJinxes;
 }

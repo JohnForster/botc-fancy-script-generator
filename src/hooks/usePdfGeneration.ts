@@ -1,18 +1,11 @@
 import { useState } from "preact/hooks";
-import type { ParsedScript } from "../utils/scriptParser";
-import type {
-  BloodOnTheClocktowerCustomScript,
-  Script,
-} from "botc-script-checker";
-import type { ScriptOptions } from "../types/options";
-import { NightOrders } from "./useScriptLoader";
-
-type Payload = {
-  script: BloodOnTheClocktowerCustomScript;
-  options: ScriptOptions;
-  nightOrders: NightOrders;
-  filename: string;
-};
+import type { Script } from "botc-script-checker";
+import {
+  NetworkPayload,
+  NightOrders,
+  ParsedScript,
+  ScriptOptions,
+} from "botc-character-sheet";
 
 export function usePdfGeneration() {
   const [showPdfModal, setShowPdfModal] = useState(false);
@@ -34,8 +27,8 @@ export function usePdfGeneration() {
     setPdfUrl(null);
     setPdfError(null);
 
-    const payload: Payload = {
-      script: rawScript,
+    const payload: NetworkPayload = {
+      script,
       options,
       nightOrders,
       filename: `${script.metadata?.name || "script"}.pdf`,

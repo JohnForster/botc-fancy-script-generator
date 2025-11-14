@@ -1,18 +1,4 @@
-export interface ScriptOptions {
-  color: string;
-  showAuthor: boolean;
-  showJinxes: boolean;
-  useOldJinxes: boolean;
-  showSwirls: boolean;
-  includeMargins: boolean;
-  solidTitle: boolean;
-  appearance: "normal" | "compact" | "super-compact";
-  showBackingSheet: boolean;
-  showNightSheet: boolean;
-  iconScale: number;
-  formatMinorWords: boolean;
-  displayNightOrder: boolean;
-}
+import { ScriptOptions } from "botc-character-sheet";
 
 export const randomColor = () => {
   const r = Math.floor(Math.random() * 256)

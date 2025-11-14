@@ -1,4 +1,5 @@
-import { randomColor, type ScriptOptions } from "../types/options";
+import { ScriptOptions } from "botc-character-sheet";
+import { randomColor } from "../types/options";
 
 interface ScriptControlsProps {
   hasScript: boolean;

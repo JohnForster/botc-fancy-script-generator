@@ -1,14 +1,13 @@
 import { useState, useEffect } from "preact/hooks";
-import { parseScript, type ParsedScript } from "../utils/scriptParser";
+import { parseScript } from "../utils/scriptParser";
 import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
 import { nightOrders } from "botc-script-checker/src/data/nightOrders";
-import { NightOrderEntry } from "botc-character-sheet";
-
-export interface NightOrders {
-  first: NightOrderEntry[];
-  other: NightOrderEntry[];
-}
+import {
+  NightOrderEntry,
+  NightOrders,
+  ParsedScript,
+} from "botc-character-sheet";
 
 export function useScriptLoader() {
   const [script, setScript] = useState<ParsedScript | null>(null);
