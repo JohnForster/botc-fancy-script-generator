@@ -4,7 +4,7 @@
     "": {
       "name": "script-pdf-maker",
       "dependencies": {
-        "botc-character-sheet": "^0.9.0",
+        "botc-character-sheet": "0.10.0",
         "botc-script-checker": "^0.1.0",
         "preact": "^10.19.3",
       },
@@ -184,7 +184,7 @@
 
     "boolbase": ["boolbase@1.0.0", "", {}, "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww=="],
 
-    "botc-character-sheet": ["botc-character-sheet@0.9.0", "", { "dependencies": { "botc-script-checker": "^0.1.1" }, "peerDependencies": { "preact": "^10.19.3" } }, "sha512-glgsBfz6VWdylg5Xjvj8lXIZUQvtQ1El+IUibXsrBTP4BmNUh4DmGI5hpybu8qoM21orzWDYzGqW6tKTsg1hig=="],
+    "botc-character-sheet": ["botc-character-sheet@0.10.0", "", { "dependencies": { "botc-script-checker": "^0.1.1" }, "peerDependencies": { "preact": "^10.19.3" } }, "sha512-2OL7vyhC5JK/RxDfNDC8FRCewPb0vedI1/AavkQT7tRymBE5x/WKG3unLrK4Ig8HDa/sMD39xJ1ftlCgYHrCrg=="],
 
     "botc-script-checker": ["botc-script-checker@0.1.0", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-cKP1oKFO+iTbud0cIRTPCq3BXBP6xJeHwIWJUZZO8q5X/ZjqQFOr22IMOxgvp8mrOgCrZxIgLqOkEqMwOSKaFA=="],
 

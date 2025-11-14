@@ -12,6 +12,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/b/b5/Icon_acrobat.png",
     id: "acrobat",
+    otherNightReminder: "The Acrobat chooses a player. :reminder:",
   },
   alchemist: {
     name: "Alchemist",
@@ -21,6 +22,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/5/54/Icon_alchemist.png",
     id: "alchemist",
+    firstNightReminder:
+      "Show the *YOU ARE* token and the character token of a Minion.",
   },
   alhadikhia: {
     name: "Al-Hadikhia",
@@ -30,6 +33,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/18/Icon_alhadikhia.png",
     id: "alhadikhia",
+    otherNightReminder:
+      'The Al-Hadikhia chooses three players. :reminder: :reminder: :reminder: Wake the player marked *1* and say "the Al-Hadikhia has chosen", then the player\'s name, then "Do you choose to live?" They either nod or shake their head. Put them to sleep and add or remove shrouds accordingly. Repeat for players marked *2* and *3*. If all three players are now alive, add a shroud to all three.',
   },
   alsaahir: {
     name: "Alsaahir",
@@ -48,6 +53,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/2/26/Icon_amnesiac.png",
     id: "amnesiac",
+    firstNightReminder: "Run the Amnesiac's ability, if applicable.",
+    otherNightReminder: "Run the Amnesiac's ability, if applicable.",
   },
   angel: {
     name: "Angel",
@@ -57,6 +64,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/ca/Icon_angel.png",
     id: "angel",
+    firstNightReminder:
+      "Announce which players are protected by the Angel. Add the *PROTECTED* token to the relevant players.",
   },
   apprentice: {
     name: "Apprentice",
@@ -66,6 +75,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/03/Icon_apprentice.png",
     id: "apprentice",
+    firstNightReminder:
+      "Show the Apprentice the *YOU ARE* card, then a Townsfolk or Minion token. In the Grimoire, replace the Apprentice token with that character token, and put the Apprentice's *IS THE APPRENTICE* reminder by that character token.",
   },
   artist: {
     name: "Artist",
@@ -84,6 +95,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/4/49/Icon_assassin.png",
     id: "assassin",
+    otherNightReminder:
+      "The Assassin might choose a player. :reminder: :reminder:",
   },
   atheist: {
     name: "Atheist",
@@ -102,6 +115,9 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/cb/Icon_balloonist.png",
     id: "balloonist",
+    firstNightReminder: "Show any player. :reminder:",
+    otherNightReminder:
+      "Show a player with a different character type to previously. :reminder:",
   },
   banshee: {
     name: "Banshee",
@@ -111,6 +127,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/63/Icon_banshee.png",
     id: "banshee",
+    otherNightReminder:
+      "If the Banshee was killed by the Demon tonight, announce to all players that the Banshee has died. :reminder:",
   },
   barber: {
     name: "Barber",
@@ -120,6 +138,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/16/Icon_barber.png",
     id: "barber",
+    otherNightReminder:
+      "If the Barber died today or tonight, show the Demon the *THIS CHARACTER SELECTED YOU* & Barber tokens. If the Demon chose 2 players, wake one at a time. Show the *YOU ARE* token & their new character token.",
   },
   barista: {
     name: "Barista",
@@ -129,6 +149,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/2/24/Icon_barista.png",
     id: "barista",
+    firstNightReminder:
+      "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
+    otherNightReminder:
+      "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
   },
   baron: {
     name: "Baron",
@@ -164,6 +188,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/e/e0/Icon_boffin.png",
     id: "boffin",
+    firstNightReminder:
+      "Wake the Boffin and the Demon. Show the not-in-play good character token. Put the Boffin and the Demon to sleep.",
   },
   bonecollector: {
     name: "Bone Collector",
@@ -173,6 +199,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/9e/Icon_bonecollector.png",
     id: "bonecollector",
+    otherNightReminder:
+      "The Bone Collector either shakes their head no or points at any dead player. If they pointed at any dead player, put the Bone Collector's 'Has Ability' reminder by the chosen player's character token. (They may need to be woken tonight to use it.)",
   },
   boomdandy: {
     name: "Boomdandy",
@@ -199,6 +227,9 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/5/5b/Icon_bountyhunter.png",
     id: "bountyhunter",
+    firstNightReminder: "Point to the *KNOWN* player.",
+    otherNightReminder:
+      "If the *KNOWN* player died today or tonight, point to a new *KNOWN* player.",
   },
   buddhist: {
     name: "Buddhist",
@@ -208,6 +239,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/2/25/Icon_buddhist.png",
     id: "buddhist",
+    firstNightReminder: "Declare which players are affected by the Buddhist.",
   },
   bureaucrat: {
     name: "Bureaucrat",
@@ -217,6 +249,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/b/b1/Icon_bureaucrat.png",
     id: "bureaucrat",
+    firstNightReminder: "The Bureaucrat chooses a player. :reminder:",
+    otherNightReminder: "The Bureaucrat chooses a player. :reminder:",
   },
   butcher: {
     name: "Butcher",
@@ -234,6 +268,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/19/Icon_butler.png",
     id: "butler",
+    firstNightReminder: "The Butler chooses a player. :reminder:",
+    otherNightReminder: "The Butler chooses a player. :reminder:",
   },
   cannibal: {
     name: "Cannibal",
@@ -252,6 +288,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/4/45/Icon_cerenovus.png",
     id: "cerenovus",
+    firstNightReminder:
+      "The Cerenovus chooses a player & a character. :reminder: Put the Cerenovus to sleep. Wake the target. Show the *THIS CHARACTER SELECTED YOU* token, the Cerenovus token, then the madness-character token.",
+    otherNightReminder:
+      "The Cerenovus chooses a player & a character. :reminder: Put the Cerenovus to sleep. Wake the target. Show the *THIS CHARACTER SELECTED YOU* token, the Cerenovus token, then the madness-character token.",
   },
   chambermaid: {
     name: "Chambermaid",
@@ -261,6 +301,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/8/87/Icon_chambermaid.png",
     id: "chambermaid",
+    firstNightReminder:
+      "The Chambermaid chooses 2 living players. Give a finger signal.",
+    otherNightReminder:
+      "The Chambermaid chooses 2 living players. Give a finger signal.",
   },
   chef: {
     name: "Chef",
@@ -269,6 +313,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/d5/Icon_chef.png",
     id: "chef",
+    firstNightReminder: "Give a finger signal.",
   },
   choirboy: {
     name: "Choirboy",
@@ -278,6 +323,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/d9/Icon_choirboy.png",
     id: "choirboy",
+    otherNightReminder:
+      "If the Demon killed the King, point to the Demon player.",
   },
   clockmaker: {
     name: "Clockmaker",
@@ -287,6 +334,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/3/3d/Icon_clockmaker.png",
     id: "clockmaker",
+    firstNightReminder: "Give a finger signal.",
   },
   courtier: {
     name: "Courtier",
@@ -296,6 +344,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/e/e0/Icon_courtier.png",
     id: "courtier",
+    firstNightReminder:
+      "The Courtier might choose a character. :reminder: :reminder:",
+    otherNightReminder:
+      "The Courtier might choose a character. :reminder: :reminder:",
   },
   cultleader: {
     name: "Cult Leader",
@@ -305,6 +357,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/6c/Icon_cultleader.png",
     id: "cultleader",
+    firstNightReminder:
+      "The Cult Leader might change alignment. If so, show the *YOU ARE* info token and a thumbs up or down for their new alignment.",
+    otherNightReminder:
+      "The Cult Leader might change alignment. If so, show the *YOU ARE* info token and a thumbs up or down for their new alignment.",
   },
   damsel: {
     name: "Damsel",
@@ -314,6 +370,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/dc/Icon_damsel.png",
     id: "damsel",
+    firstNightReminder:
+      "If the Damsel was chosen by the Huntsman, show them the *YOU ARE* info token and their new character token.",
+    otherNightReminder:
+      "If the Damsel was chosen by the Huntsman, show them the *YOU ARE* info token and their new character token.",
   },
   deusexfiasco: {
     name: "Deus ex Fiasco",
@@ -340,6 +400,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/09/Icon_devilsadvocate.png",
     id: "devilsadvocate",
+    firstNightReminder:
+      "The Devil's Advocate chooses a living player. :reminder:",
+    otherNightReminder:
+      "The Devil's Advocate chooses a living player. :reminder:",
   },
   djinn: {
     name: "Djinn",
@@ -366,6 +430,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/f2/Icon_dreamer.png",
     id: "dreamer",
+    firstNightReminder:
+      "The Dreamer points to a player. Show 1 good & 1 evil character token, 1 of which is their character.",
+    otherNightReminder:
+      "The Dreamer points to a player. Show 1 good & 1 evil character token, 1 of which is their character.",
   },
   drunk: {
     name: "Drunk",
@@ -384,6 +452,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/8/87/Icon_duchess.png",
     id: "duchess",
+    otherNightReminder:
+      "Wake each player marked *VISITOR* or *FALSE INFO* one at a time. Show them the Duchess token, then fingers (1, 2, 3) equaling the number of evil players marked “Visitor” or, if you are waking the player marked “False Info,” show them any number of fingers except the number of evil players marked “Visitor.”",
   },
   empath: {
     name: "Empath",
@@ -393,6 +463,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/13/Icon_empath.png",
     id: "empath",
+    firstNightReminder: "Give a finger signal.",
+    otherNightReminder: "Give a finger signal.",
   },
   engineer: {
     name: "Engineer",
@@ -402,6 +474,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/b/b9/Icon_engineer.png",
     id: "engineer",
+    firstNightReminder:
+      "The Engineer might choose Minions or Demons. :reminder: If they do: Put the Engineer to sleep. Wake a target, show them the *YOU ARE* token and their new character token, then put that target to sleep. Repeat for all players that changed characters.",
+    otherNightReminder:
+      "The Engineer might choose Minions or Demons. :reminder: If they do: Put the Engineer to sleep. Wake a target, show them the *YOU ARE* token and their new character token, then put that target to sleep. Repeat for all players that changed characters.",
   },
   eviltwin: {
     name: "Evil Twin",
@@ -411,6 +487,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/f4/Icon_eviltwin.png",
     id: "eviltwin",
+    firstNightReminder:
+      "Wake both twins. Allow eye contact. Show the good twin's character token to the Evil Twin & vice versa.",
   },
   exorcist: {
     name: "Exorcist",
@@ -420,6 +498,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/c2/Icon_exorcist.png",
     id: "exorcist",
+    otherNightReminder:
+      "The Exorcist chooses a player. :reminder: Put the Exorcist to sleep. If the Exorcist chose the Demon: Wake the Demon. Show the *THIS CHARACTER SELECTED YOU* & Exorcist tokens. Point to the Exorcist.",
   },
   fanggu: {
     name: "Fang Gu",
@@ -429,6 +509,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/0e/Icon_fanggu.png",
     id: "fanggu",
+    otherNightReminder:
+      "The Fang Gu chooses a player. :reminder: If they chose an Outsider (once only): Replace the Outsider token with the spare Fang Gu token. Put the Fang Gu to sleep. Wake the target. Show the *YOU ARE* and Fang Gu tokens & give a thumbs-down. :reminder:",
   },
   farmer: {
     name: "Farmer",
@@ -437,6 +519,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/fe/Icon_farmer.png",
     id: "farmer",
+    otherNightReminder:
+      "If the Farmer died tonight, wake an alive good player. Show them the *YOU ARE* info token and a Farmer character token. Replace their previous token with the Farmer token.",
   },
   fearmonger: {
     name: "Fearmonger",
@@ -446,6 +530,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/11/Icon_fearmonger.png",
     id: "fearmonger",
+    firstNightReminder:
+      'The Fearmonger chooses a player. :reminder: Declare that "the Fearmonger has chosen a player."',
+    otherNightReminder:
+      'The Fearmonger chooses a player. :reminder: If the player wasn\'t already marked with the *FEAR* reminder, declare that "the Fearmonger has chosen a player."',
   },
   ferryman: {
     name: "Ferryman",
@@ -488,6 +576,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/a/ac/Icon_flowergirl.png",
     id: "flowergirl",
+    otherNightReminder: "Either nod or shake your head.",
   },
   fool: {
     name: "Fool",
@@ -505,6 +594,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/97/Icon_fortuneteller.png",
     id: "fortuneteller",
+    firstNightReminder:
+      "The Fortune Teller chooses 2 players. Nod if either is the Demon (or the *RED HERRING*).",
+    otherNightReminder:
+      "The Fortune Teller chooses 2 players. Nod if either is the Demon (or the *RED HERRING*).",
   },
   gambler: {
     name: "Gambler",
@@ -514,6 +607,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/fd/Icon_gambler.png",
     id: "gambler",
+    otherNightReminder:
+      "The Gambler chooses a player & a character. :reminder:",
   },
   gangster: {
     name: "Gangster",
@@ -540,6 +635,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/99/Icon_general.png",
     id: "general",
+    firstNightReminder: "Give a thumb signal.",
+    otherNightReminder: "Give a thumb signal.",
   },
   gnome: {
     name: "Gnome",
@@ -567,6 +664,9 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/d0/Icon_godfather.png",
     id: "godfather",
+    firstNightReminder: "Show the character tokens of all in-play Outsiders.",
+    otherNightReminder:
+      "If an Outsider died today, the Godfather chooses a player. :reminder:",
   },
   golem: {
     name: "Golem",
@@ -594,6 +694,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/c7/Icon_gossip.png",
     id: "gossip",
+    otherNightReminder:
+      "If the Gossip is due to kill a player, they die. :reminder:",
   },
   grandmother: {
     name: "Grandmother",
@@ -603,6 +705,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/2/26/Icon_grandmother.png",
     id: "grandmother",
+    firstNightReminder:
+      "Point to the grandchild player & show their character token.",
+    otherNightReminder:
+      "If the grandchild was killed by the Demon, the Grandmother dies too. :reminder:",
   },
   gunslinger: {
     name: "Gunslinger",
@@ -621,6 +727,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/60/Icon_harlot.png",
     id: "harlot",
+    otherNightReminder:
+      "The Harlot points at any living player. Then, put the Harlot to sleep. Wake the chosen player, show them the *THIS CHARACTER SELECTED YOU* token, then the Harlot token. That player either nods their head yes or shakes their head no. If they nodded their head yes, wake the Harlot and show them the chosen player's character token. Then, you may decide that both players die.",
   },
   harpy: {
     name: "Harpy",
@@ -630,6 +738,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/d3/Icon_harpy.png",
     id: "harpy",
+    firstNightReminder:
+      "The Harpy chooses two players. :reminder: :reminder: Put the Harpy to sleep. Wake the 1st target. Show the *THIS CHARACTER SELECTED YOU* token, the Harpy token, then point to the 2nd target.",
+    otherNightReminder:
+      "The Harpy chooses two players. :reminder: :reminder: Put the Harpy to sleep. Wake the 1st target. Show the *THIS CHARACTER SELECTED YOU* token, the Harpy token, then point to the 2nd target.",
   },
   hatter: {
     name: "Hatter",
@@ -639,6 +751,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/4/44/Icon_hatter.png",
     id: "hatter",
+    otherNightReminder:
+      "If the Hatter died today or tonight, wake Minions and Demons, allow them to choose new characters.",
   },
   hellslibrarian: {
     name: "Hell's Librarian",
@@ -673,6 +787,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/63/Icon_highpriestess.png",
     id: "highpriestess",
+    firstNightReminder: "Point to a player.",
+    otherNightReminder: "Point to a player.",
   },
   huntsman: {
     name: "Huntsman",
@@ -682,6 +798,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/a/a1/Icon_huntsman.png",
     id: "huntsman",
+    firstNightReminder:
+      "The Huntsman might choose a player. :reminder: If that player was the Damsel: Put the Huntsman to sleep. Wake the Damsel and show them the *YOU ARE* info token and their new character token.",
+    otherNightReminder:
+      "The Huntsman might choose a player. :reminder: If that player was the Damsel: Put the Huntsman to sleep. Wake the Damsel and show them the *YOU ARE* info token and their new character token.",
   },
   imp: {
     name: "Imp",
@@ -691,6 +811,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/5/5c/Icon_imp.png",
     id: "imp",
+    otherNightReminder:
+      "The Imp chooses a player. :reminder: If the Imp chose themselves: Replace 1 alive Minion token with a spare Imp token. Put the old Imp to sleep. Wake the new Imp. Show the *YOU ARE* token, then show the Imp token.",
   },
   innkeeper: {
     name: "Innkeeper",
@@ -700,6 +822,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/0c/Icon_innkeeper.png",
     id: "innkeeper",
+    otherNightReminder:
+      "The Innkeeper chooses 2 players. :reminder: :reminder: :reminder:",
   },
   investigator: {
     name: "Investigator",
@@ -708,6 +832,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/a/ad/Icon_investigator.png",
     id: "investigator",
+    firstNightReminder:
+      "Show the Minion character token. Point to both the *MINION* and *WRONG* players.",
   },
   judge: {
     name: "Judge",
@@ -726,6 +852,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/4/42/Icon_juggler.png",
     id: "juggler",
+    otherNightReminder: "Give a finger signal.",
   },
   kazali: {
     name: "Kazali",
@@ -735,6 +862,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/3/3c/Icon_kazali.png",
     id: "kazali",
+    firstNightReminder: "Wake the Kazali, allow them to choose Minions.",
+    otherNightReminder: "The Kazali chooses a player. :reminder: ",
   },
   king: {
     name: "King",
@@ -744,6 +873,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/dc/Icon_king.png",
     id: "king",
+    firstNightReminder:
+      "Wake the Demon. Show the *THIS PLAYER IS* token and the King token, then point to the King.",
+    otherNightReminder:
+      "If the dead equal or outnumber the living, show the character token of an alive player.",
   },
   klutz: {
     name: "Klutz",
@@ -761,6 +894,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/8/8e/Icon_knight.png",
     id: "knight",
+    firstNightReminder: "Point to the two non-Demon players marked *KNOW*.",
   },
   legion: {
     name: "Legion",
@@ -770,6 +904,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/cb/Icon_legion.png",
     id: "legion",
+    otherNightReminder: "A player might die. :reminder:",
   },
   leviathan: {
     name: "Leviathan",
@@ -779,6 +914,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/a/a7/Icon_leviathan.png",
     id: "leviathan",
+    firstNightReminder:
+      'Declare that "The Leviathan is in play." Mark the Leviathan with the *DAY 1* reminder. :reminder:',
+    otherNightReminder:
+      'Optionally, declare that "The Leviathan is in play." Replace the reminder token. :reminder:',
   },
   librarian: {
     name: "Librarian",
@@ -788,6 +927,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/e/e0/Icon_librarian.png",
     id: "librarian",
+    firstNightReminder:
+      "Show the Outsider character token. Point to both the *OUTSIDER* and *WRONG* players.",
   },
   lilmonsta: {
     name: "Lil' Monsta",
@@ -797,6 +938,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/c3/Icon_lilmonsta.png",
     id: "lilmonsta",
+    firstNightReminder:
+      "Wake all Minions, allow them to choose a babysitter. :reminder:",
+    otherNightReminder:
+      "Wake all Minions, allow them to choose a babysitter. :reminder: A player might die. :reminder:",
   },
   lleech: {
     name: "Lleech",
@@ -806,6 +951,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/7/70/Icon_lleech.png",
     id: "lleech",
+    firstNightReminder: "The Lleech chooses a player. :reminder:",
+    otherNightReminder: "The Lleech chooses a player. :reminder:",
   },
   lordoftyphon: {
     name: "Lord of Typhon",
@@ -815,6 +962,9 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/cf/Icon_lordoftyphon.png",
     id: "lordoftyphon",
+    firstNightReminder:
+      "Replace neighbors of the Lord of Typhon with Minions, wake them, tell them their new alignment and character, then do minion info.",
+    otherNightReminder: "The Lord of Typhon chooses a player. :reminder:",
   },
   lunatic: {
     name: "Lunatic",
@@ -824,6 +974,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/64/Icon_lunatic.png",
     id: "lunatic",
+    firstNightReminder:
+      "If there are 7 or more players, wake the Lunatic: Show the *THESE ARE YOUR MINIONS* token. Point to any players. Show the *THESE CHARACTERS ARE NOT IN PLAY* token. Show 3 good character tokens. Put the Lunatic to sleep. Wake the Demon. Show the *YOU ARE* info token and the Demon token. Show the *THIS PLAYER IS* info token and the Lunatic token, then point to the Lunatic.",
+    otherNightReminder:
+      "Do whatever needs to be done to simulate the Demon acting. Put the Lunatic to sleep. Wake the Demon. Show the Lunatic token & point to them, then their target(s).",
   },
   lycanthrope: {
     name: "Lycanthrope",
@@ -833,6 +987,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/92/Icon_lycanthrope.png",
     id: "lycanthrope",
+    otherNightReminder: "The Lycanthrope chooses a player. :reminder:",
   },
   magician: {
     name: "Magician",
@@ -842,6 +997,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/93/Icon_magician.png",
     id: "magician",
+    firstNightReminder:
+      "Include the Magician in the Minion and Demon Info steps.",
   },
   marionette: {
     name: "Marionette",
@@ -851,6 +1008,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/cf/Icon_marionette.png",
     id: "marionette",
+    firstNightReminder:
+      "Wake the Demon. Point to the player marked *IS THE MARIONETTE* and show the *THIS PLAYER IS* token and the Marionette character token.",
   },
   mastermind: {
     name: "Mastermind",
@@ -869,6 +1028,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/f1/Icon_mathematician.png",
     id: "mathematician",
+    firstNightReminder: "Give a finger signal.",
+    otherNightReminder: "Give a finger signal.",
   },
   matron: {
     name: "Matron",
@@ -896,6 +1057,9 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/f2/Icon_mezepheles.png",
     id: "mezepheles",
+    firstNightReminder: "Show the written word.",
+    otherNightReminder:
+      "If a player is marked with the *TURNS EVIL* reminder, wake them. Show the *YOU ARE* info token and a thumbs down. The Mezepheles loses their ability. :reminder:",
   },
   minstrel: {
     name: "Minstrel",
@@ -914,6 +1078,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/7/7c/Icon_monk.png",
     id: "monk",
+    otherNightReminder: "The Monk chooses a player. :reminder:",
   },
   moonchild: {
     name: "Moonchild",
@@ -923,6 +1088,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/dc/Icon_moonchild.png",
     id: "moonchild",
+    otherNightReminder:
+      "If the Moonchild is due to kill a good player, they die. :reminder:",
   },
   mutant: {
     name: "Mutant",
@@ -940,6 +1107,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/f0/Icon_nightwatchman.png",
     id: "nightwatchman",
+    firstNightReminder:
+      "The Nightwatchman might choose a player :reminder: Put the Nightwatchman to sleep. Wake the target and show the *THIS PLAYER IS* and Nightwatchman tokens and point to the Nightwatchman.",
+    otherNightReminder:
+      "The Nightwatchman might choose a player :reminder: Put the Nightwatchman to sleep. Wake the target and show the *THIS PLAYER IS* and Nightwatchman tokens and point to the Nightwatchman.",
   },
   noble: {
     name: "Noble",
@@ -948,6 +1119,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/cc/Icon_noble.png",
     id: "noble",
+    firstNightReminder: "Point to all three players marked *KNOW*.",
   },
   nodashii: {
     name: "No Dashii",
@@ -957,6 +1129,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/e/eb/Icon_nodashii.png",
     id: "nodashii",
+    otherNightReminder: "The No Dashii chooses a player. :reminder:",
   },
   ogre: {
     name: "Ogre",
@@ -966,6 +1139,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/2/25/Icon_ogre.png",
     id: "ogre",
+    firstNightReminder: "The Ogre points to a player. :reminder:",
   },
   ojo: {
     name: "Ojo",
@@ -975,6 +1149,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/6f/Icon_ojo.png",
     id: "ojo",
+    otherNightReminder: "The Ojo chooses a character. :reminder: ",
   },
   oracle: {
     name: "Oracle",
@@ -983,6 +1158,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/b/bb/Icon_oracle.png",
     id: "oracle",
+    otherNightReminder: "Give a finger signal.",
   },
   organgrinder: {
     name: "Organ Grinder",
@@ -992,6 +1168,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/61/Icon_organgrinder.png",
     id: "organgrinder",
+    firstNightReminder:
+      "The Organ Grinder either nods their head yes to be drunk, or shakes their head no to be sober. :reminder:",
+    otherNightReminder:
+      "The Organ Grinder either nods their head yes to be drunk, or shakes their head no to be sober. :reminder:",
   },
   pacifist: {
     name: "Pacifist",
@@ -1009,6 +1189,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/5/5d/Icon_philosopher.png",
     id: "philosopher",
+    firstNightReminder:
+      "The Philosopher might choose a character. If necessary, swap their character token. :reminder:",
+    otherNightReminder:
+      "The Philosopher might choose a character. If necessary, swap their character token. :reminder:",
   },
   pithag: {
     name: "Pit-Hag",
@@ -1018,6 +1202,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/6b/Icon_pithag.png",
     id: "pithag",
+    otherNightReminder:
+      "The Pit-Hag chooses a player & a character. If they chose a character that is not in play: Put the Pit-Hag to sleep. Wake the target. Show the *YOU ARE* token & their new character token.",
   },
   pixie: {
     name: "Pixie",
@@ -1027,6 +1213,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/d5/Icon_pixie.png",
     id: "pixie",
+    firstNightReminder: "Show the Townsfolk character token marked *MAD*.",
   },
   plaguedoctor: {
     name: "Plague Doctor",
@@ -1035,6 +1222,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/e/e2/Icon_plaguedoctor.png",
     id: "plaguedoctor",
+    otherNightReminder:
+      "If the Plague Doctor died, the Storyteller gained a Minion ability. If you haven’t done this yet, do so now.",
   },
   po: {
     name: "Po",
@@ -1043,6 +1232,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     team: "demon",
     wiki_image: "https://wiki.bloodontheclocktower.com/images/b/b2/Icon_po.png",
     id: "po",
+    otherNightReminder:
+      "The Po may choose a player OR chooses 3 players if they chose no-one last night. :reminder: or :reminder: :reminder: :reminder:",
   },
   poisoner: {
     name: "Poisoner",
@@ -1052,6 +1243,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/b/b1/Icon_poisoner.png",
     id: "poisoner",
+    firstNightReminder: "The Poisoner chooses a player. :reminder:",
+    otherNightReminder: "The Poisoner chooses a player. :reminder:",
   },
   politician: {
     name: "Politician",
@@ -1070,6 +1263,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/91/Icon_poppygrower.png",
     id: "poppygrower",
+    firstNightReminder:
+      "Do not do the Minion Info and Demon Info steps. Wake the Demon, show the *THESE CHARACTERS ARE NOT IN PLAY* info token and any three good character tokens that are not in play.",
+    otherNightReminder:
+      "If the Poppy Grower died today or tonight, wake the Minions, show the *THIS IS THE DEMON* info token and point to the Demon. Put them to sleep. Wake the Demon, show the *THESE ARE YOUR MINIONS* info token and point to the Minions. Put the Demon to sleep.",
   },
   preacher: {
     name: "Preacher",
@@ -1079,6 +1276,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/8/82/Icon_preacher.png",
     id: "preacher",
+    firstNightReminder:
+      "The Preacher chooses a player. :reminder: If they chose a Minion: Put the Preacher to sleep. Wake the target. Show the *THIS CHARACTER SELECTED YOU* token and the Preacher token.",
+    otherNightReminder:
+      "The Preacher chooses a player. :reminder: If they chose a Minion: Put the Preacher to sleep. Wake the target. Show the *THIS CHARACTER SELECTED YOU* token and the Preacher token.",
   },
   princess: {
     name: "Princess",
@@ -1088,6 +1289,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/3/36/Icon_princess.png",
     id: "princess",
+    otherNightReminder:
+      "If the Princess nominated the player who was executed today, the Demon wakes as normal, but no one dies to the Demon's ability.",
   },
   professor: {
     name: "Professor",
@@ -1097,6 +1300,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/65/Icon_professor.png",
     id: "professor",
+    otherNightReminder:
+      "The Professor might choose a dead player. :reminder: :reminder:",
   },
   psychopath: {
     name: "Psychopath",
@@ -1115,6 +1320,9 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/f4/Icon_pukka.png",
     id: "pukka",
+    firstNightReminder: "The Pukka chooses a player. :reminder:",
+    otherNightReminder:
+      "The Pukka chooses a player. :reminder: The previously poisoned player dies then becomes healthy. :reminder:",
   },
   puzzlemaster: {
     name: "Puzzlemaster",
@@ -1133,6 +1341,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/e/ef/Icon_ravenkeeper.png",
     id: "ravenkeeper",
+    otherNightReminder:
+      "If the Ravenkeeper died tonight, the Ravenkeeper chooses a player. Show that player's character token.",
   },
   recluse: {
     name: "Recluse",
@@ -1167,6 +1377,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/a/a0/Icon_sage.png",
     id: "sage",
+    otherNightReminder:
+      "If the Demon killed the Sage, wake the Sage and point to 2 players, 1 of which is the Demon.",
   },
   sailor: {
     name: "Sailor",
@@ -1176,6 +1388,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/16/Icon_sailor.png",
     id: "sailor",
+    firstNightReminder: "The Sailor chooses a living player. :reminder:",
+    otherNightReminder: "The Sailor chooses a living player. :reminder:",
   },
   saint: {
     name: "Saint",
@@ -1211,6 +1425,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/13/Icon_scarletwoman.png",
     id: "scarletwoman",
+    otherNightReminder:
+      "If the Scarlet Woman became the Demon today, show them the *YOU ARE* token, then the Demon token.",
   },
   seamstress: {
     name: "Seamstress",
@@ -1220,6 +1436,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/5/53/Icon_seamstress.png",
     id: "seamstress",
+    firstNightReminder:
+      "The Seamstress might choose 2 players. Nod or shake your head. :reminder:",
+    otherNightReminder:
+      "The Seamstress might choose 2 players. Nod or shake your head. :reminder:",
   },
   sentinel: {
     name: "Sentinel",
@@ -1237,6 +1457,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/1f/Icon_shabaloth.png",
     id: "shabaloth",
+    otherNightReminder:
+      "A previously chosen player might be resurrected. :reminder: The Shabaloth chooses 2 players. :reminder: :reminder:",
   },
   shugenja: {
     name: "Shugenja",
@@ -1246,6 +1468,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/11/Icon_shugenja.png",
     id: "shugenja",
+    firstNightReminder: "Point clockwise or anticlockwise around the circle.",
   },
   slayer: {
     name: "Slayer",
@@ -1264,6 +1487,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/08/Icon_snakecharmer.png",
     id: "snakecharmer",
+    firstNightReminder:
+      "The Snake Charmer chooses a player. If they chose the Demon: Show the *YOU ARE* & Demon tokens. Give a thumbs down. Swap the Snake Charmer & Demon tokens. Put the old Snake Charmer to sleep. Wake the old Demon. Show the *YOU ARE* and Snake Charmer tokens & give a thumbs up. :reminder:",
+    otherNightReminder:
+      "The Snake Charmer chooses a player. If they chose the Demon: Show the *YOU ARE* & Demon tokens. Give a thumbs down. Swap the Snake Charmer & Demon tokens. Put the old Snake Charmer to sleep. Wake the old Demon. Show the *YOU ARE* and Snake Charmer tokens & give a thumbs up. :reminder:",
   },
   snitch: {
     name: "Snitch",
@@ -1272,6 +1499,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/c/c1/Icon_snitch.png",
     id: "snitch",
+    firstNightReminder:
+      "Wake each Minion. Show the *THESE CHARACTERS ARE NOT IN PLAY* token and three not-in-play character tokens. Put each Minion to sleep.",
   },
   soldier: {
     name: "Soldier",
@@ -1297,6 +1526,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/5/54/Icon_spy.png",
     id: "spy",
+    firstNightReminder: "Show the Grimoire for as long as the Spy needs.",
+    otherNightReminder: "Show the Grimoire for as long as the Spy needs.",
   },
   steward: {
     name: "Steward",
@@ -1305,6 +1536,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/f/fe/Icon_steward.png",
     id: "steward",
+    firstNightReminder: "Point to the good player marked *KNOW*.",
   },
   stormcatcher: {
     name: "Storm Catcher",
@@ -1314,6 +1546,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/08/Icon_stormcatcher.png",
     id: "stormcatcher",
+    firstNightReminder:
+      "At the start of the night, announce which character is stormcaught. If that character is in play, mark that player as *STORMCAUGHT*. :reminder: Wake each evil player and show them the character token, then the marked player.  If not in play, wake each evil player, show them the *THESE CHARACTERS ARE NOT IN PLAY* token and the relevant character token.",
   },
   summoner: {
     name: "Summoner",
@@ -1323,6 +1557,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/1a/Icon_summoner.png",
     id: "summoner",
+    firstNightReminder:
+      "Show the *THESE CHARACTERS ARE NOT IN PLAY* token. Show 3 not-in-play good character tokens.",
+    otherNightReminder:
+      "Change the Summoner reminder token to the relevant night. If it is night 3, the Summoner chooses a player and a Demon. Put the Summoner to sleep. Wake the chosen player. Show the *YOU ARE* token, a thumbs down and the chosen Demon token.",
   },
   sweetheart: {
     name: "Sweetheart",
@@ -1331,6 +1569,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/6/6a/Icon_sweetheart.png",
     id: "sweetheart",
+    otherNightReminder:
+      "If the Sweetheart died, a player became drunk immediately. If you haven't done this yet, do so now. :reminder:",
   },
   tealady: {
     name: "Tea Lady",
@@ -1348,6 +1588,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/7/77/Icon_thief.png",
     id: "thief",
+    firstNightReminder: "The Thief chooses a player. :reminder:",
+    otherNightReminder: "The Thief chooses a player. :reminder:",
   },
   tinker: {
     name: "Tinker",
@@ -1356,6 +1598,17 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/98/Icon_tinker.png",
     id: "tinker",
+    otherNightReminder: "The Tinker might die. :reminder:",
+  },
+  tor: {
+    id: "tor",
+    firstNightReminder: "",
+    otherNightReminder:
+      "If a player died tonight, show the *YOU ARE* info token, their character token, & a thumbs up or thumbs down.",
+    name: "Tor",
+    team: "fabled",
+    ability:
+      "Players don't know their character or alignment. They learn them when they die.",
   },
   towncrier: {
     name: "Town Crier",
@@ -1364,6 +1617,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/e/ef/Icon_towncrier.png",
     id: "towncrier",
+    otherNightReminder: "Either nod or shake your head.",
   },
   toymaker: {
     name: "Toymaker",
@@ -1373,6 +1627,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/2/27/Icon_toymaker.png",
     id: "toymaker",
+    firstNightReminder:
+      "Resolve the Minion Info and Demon Info steps even though there are fewer than 7 players.",
+    otherNightReminder:
+      "If it is a night when a Demon attack could end the game, and the Demon is marked *FINAL NIGHT: NO ATTACK*, then the Demon does not act tonight. (Do not wake them.)",
   },
   undertaker: {
     name: "Undertaker",
@@ -1381,6 +1639,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/05/Icon_undertaker.png",
     id: "undertaker",
+    otherNightReminder:
+      "If a player was executed today, show their character token.",
   },
   vigormortis: {
     name: "Vigormortis",
@@ -1390,6 +1650,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/1a/Icon_vigormortis.png",
     id: "vigormortis",
+    otherNightReminder:
+      "The Vigormortis chooses a player. :reminder: If that player is a Minion, poison a neighboring Townsfolk. :reminder: :reminder:",
   },
   villageidiot: {
     name: "Village Idiot",
@@ -1399,6 +1661,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/d/da/Icon_villageidiot.png",
     id: "villageidiot",
+    firstNightReminder:
+      "Choose a Village Idiot to be drunk. Wake the Village Idiots one at a time, they choose a player, show either good or evil thumbs according to the alignment of that player.",
+    otherNightReminder:
+      "Wake the Village Idiots one at a time, they choose a player, show either good or evil thumbs according to the alignment of that player.",
   },
   virgin: {
     name: "Virgin",
@@ -1417,6 +1683,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/a/a4/Icon_vizier.png",
     id: "vizier",
+    firstNightReminder: "Announce the Vizier player to the group.",
   },
   vortox: {
     name: "Vortox",
@@ -1426,6 +1693,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/8/89/Icon_vortox.png",
     id: "vortox",
+    otherNightReminder: "The Vortox chooses a player. :reminder:",
   },
   voudon: {
     name: "Voudon",
@@ -1443,6 +1711,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/8/85/Icon_washerwoman.png",
     id: "washerwoman",
+    firstNightReminder:
+      "Show the Townsfolk character token. Point to both the *TOWNSFOLK* and *WRONG* players.",
   },
   widow: {
     name: "Widow",
@@ -1452,6 +1722,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/9/99/Icon_widow.png",
     id: "widow",
+    firstNightReminder:
+      "Show the Grimoire for as long as the Widow needs. The Widow chooses a player. :reminder:",
   },
   witch: {
     name: "Witch",
@@ -1461,6 +1733,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/7/7b/Icon_witch.png",
     id: "witch",
+    firstNightReminder: "The Witch chooses a player. :reminder:",
+    otherNightReminder: "The Witch chooses a player. :reminder:",
   },
   wizard: {
     name: "Wizard",
@@ -1470,6 +1744,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/b/b5/Icon_wizard.png",
     id: "wizard",
+    firstNightReminder: "Run the Wizard's ability, if applicable.",
+    otherNightReminder: "Run the Wizard's ability, if applicable.",
   },
   wraith: {
     name: "Wraith",
@@ -1479,6 +1755,8 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/8/8f/Icon_wraith.png",
     id: "wraith",
+    firstNightReminder: "Wake the Wraith whenever other evil players wake.",
+    otherNightReminder: "Wake the Wraith whenever other evil players wake.",
   },
   xaan: {
     name: "Xaan",
@@ -1487,6 +1765,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/0c/Icon_xaan.png",
     id: "xaan",
+    firstNightReminder:
+      "Mark the Xaan with the *NIGHT 1* reminder. If X is 1, mark the Xaan with the *X* reminder token. :reminder: :reminder:",
+    otherNightReminder:
+      "Change the Xaan reminder token to the relevant night. If it is night X, mark the Xaan with the *X* reminder token. :reminder: :reminder:",
   },
   yaggababble: {
     name: "Yaggababble",
@@ -1496,6 +1778,10 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/0/08/Icon_yaggababble.png",
     id: "yaggababble",
+    firstNightReminder:
+      "Choose a secret phrase. Wake the Yaggababble and let them know their secret phrase.",
+    otherNightReminder:
+      "For each time the Yaggababble said the phrase today, you may choose a player. They die. :reminder:",
   },
   zealot: {
     name: "Zealot",
@@ -1514,5 +1800,7 @@ export const ALL_CHARACTERS: Record<string, ResolvedCharacter> = {
     wiki_image:
       "https://wiki.bloodontheclocktower.com/images/1/15/Icon_zombuul.png",
     id: "zombuul",
+    otherNightReminder:
+      "If no one died today, the Zombuul chooses a player. :reminder:",
   },
 };

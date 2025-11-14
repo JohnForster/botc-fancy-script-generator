@@ -99,6 +99,11 @@ body {
 }
 
 @font-face {
+  font-family: Trade Gothic Bold;
+  src: url("/fonts/TradeGothic/TradeGothicBold.otf");
+}
+
+@font-face {
   font-family: Goudy Old Style;
   src: url("/fonts/GoudyOldStyle/GoudyOldStyle.ttf");
 }
@@ -287,7 +292,6 @@ body {
   color: var(--text-secondary);
   font-size: 12px;
 }
-
 
 .toggle-section {
   display: flex;

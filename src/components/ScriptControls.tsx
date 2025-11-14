@@ -238,6 +238,23 @@ export function ScriptControls({
                     <label className="toggle-label">
                       <input
                         type="checkbox"
+                        checked={options.showNightSheet}
+                        onChange={(e) =>
+                          onOptionChange(
+                            "showNightSheet",
+                            (e.target as HTMLInputElement).checked
+                          )
+                        }
+                        className="toggle-input"
+                      />
+                      <span className="toggle-text">Include Night Sheet</span>
+                    </label>
+                  </div>
+
+                  <div className="toggle-section">
+                    <label className="toggle-label">
+                      <input
+                        type="checkbox"
                         checked={options.displayNightOrder}
                         onChange={(e) =>
                           onOptionChange(

@@ -8,6 +8,7 @@ export interface ScriptOptions {
   solidTitle: boolean;
   appearance: "normal" | "compact" | "super-compact";
   showBackingSheet: boolean;
+  showNightSheet: boolean;
   iconScale: number;
   formatMinorWords: boolean;
   displayNightOrder: boolean;
@@ -25,7 +26,6 @@ export const randomColor = () => {
     .padStart(2, "0");
 
   const hex = `#${r}${g}${b}`;
-  console.log("hex:", hex);
   return hex;
 };
 
@@ -39,6 +39,7 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   solidTitle: false,
   appearance: "normal",
   showBackingSheet: true,
+  showNightSheet: true,
   iconScale: 1.6,
   formatMinorWords: false,
   displayNightOrder: false,

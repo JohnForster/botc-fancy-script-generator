@@ -1,5 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
-import { CharacterSheet, SheetBack } from "botc-character-sheet";
+import { CharacterSheet, SheetBack, NightSheet } from "botc-character-sheet";
 import "botc-character-sheet/style.css";
 import { groupCharactersByTeam, findJinxes } from "./utils/scriptParser";
 import { logUsage } from "./utils/logger";
@@ -179,6 +179,16 @@ export function App() {
                 otherNightOrder={nightOrders.other}
                 formatMinorWords={options.formatMinorWords}
                 displayNightOrder={options.displayNightOrder}
+              />
+            )}
+
+            {options.showNightSheet && (
+              <NightSheet
+                firstNightOrder={nightOrders.first}
+                otherNightOrder={nightOrders.other}
+                includeMargins={options.includeMargins}
+                title={script.metadata?.name || "Custom Script"}
+                color={options.color}
               />
             )}
           </div>
