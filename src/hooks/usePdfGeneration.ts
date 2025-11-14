@@ -1,5 +1,4 @@
 import { useState } from "preact/hooks";
-import type { Script } from "botc-script-checker";
 import {
   NetworkPayload,
   NightOrders,
@@ -15,7 +14,6 @@ export function usePdfGeneration() {
   const [pdfError, setPdfError] = useState<string | null>(null);
 
   const generatePDF = async (
-    rawScript: Script,
     script: ParsedScript,
     options: ScriptOptions,
     nightOrders: NightOrders

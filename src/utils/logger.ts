@@ -1,4 +1,4 @@
-import type { ParsedScript } from "./scriptParser";
+import { ParsedScript } from "botc-character-sheet";
 
 const FIREBASE_URL = "https://logusage-dvbaqkhwga-uc.a.run.app";
 
