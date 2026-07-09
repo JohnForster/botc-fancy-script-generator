@@ -22,6 +22,7 @@ interface ScriptControlsProps {
   scriptText: string;
   error: string | null;
   onFileUpload: (event: Event) => void;
+  onPasteButton: () => void;
   onLoadExample: () => void;
   onLoadExampleTeensyville: () => void;
   onColorChange: (color: string | string[]) => void;
@@ -46,6 +47,7 @@ export function ScriptControls({
   scriptText,
   error,
   onFileUpload,
+  onPasteButton,
   onLoadExample,
   onLoadExampleTeensyville,
   onColorChange,
@@ -86,7 +88,9 @@ export function ScriptControls({
       <div className="control-panel">
         <UploadSection
           hasScript={hasScript}
+          error={error}
           onFileUpload={onFileUpload}
+          onPasteButton={onPasteButton}
           onLoadExample={onLoadExample}
           onLoadExampleTeensyville={onLoadExampleTeensyville}
         />

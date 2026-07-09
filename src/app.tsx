@@ -27,6 +27,7 @@ export function App() {
     loadScript,
     handleScriptTextChange,
     handleFileUpload,
+    handlePasteButton,
     handleSort,
     handleSaveScript,
     updateScriptMetadata,
@@ -184,6 +185,7 @@ export function App() {
             onScriptChange={handleScriptChange}
             onSave={handleSaveScript}
             onFileUpload={handleFileUpload}
+            onPasteButton={handlePasteButton}
             onLoadExample={handleLoadExample}
             onLoadExampleTeensyville={handleLoadExampleTeensyville}
             onColorChange={handleColorChange}

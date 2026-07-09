@@ -1,13 +1,17 @@
 interface UploadSectionProps {
   hasScript: boolean;
+  error: string | null;
   onFileUpload: (event: Event) => void;
+  onPasteButton: () => void;
   onLoadExample: () => void;
   onLoadExampleTeensyville: () => void;
 }
 
 export function UploadSection({
   hasScript,
+  error,
   onFileUpload,
+  onPasteButton,
   onLoadExample,
   onLoadExampleTeensyville,
 }: UploadSectionProps) {
@@ -29,7 +33,16 @@ export function UploadSection({
         <div className="paste-hint">
           Paste directly with {isMac ? "⌘" : "ctrl"}+V
         </div>
+        <button
+          type="button"
+          onClick={onPasteButton}
+          className="paste-button"
+        >
+          Paste JSON
+        </button>
       </div>
+
+      {!hasScript && error && <div className="error-message">{error}</div>}
 
       {!hasScript && (
         <div className="example-section">

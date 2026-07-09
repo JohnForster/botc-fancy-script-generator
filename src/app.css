@@ -198,7 +198,8 @@ a:visited {
 }
 
 .upload-section .upload-label,
-.upload-section .paste-hint {
+.upload-section .paste-hint,
+.upload-section .paste-button {
   flex: 1 1 0;
   text-align: center;
 }
@@ -229,6 +230,28 @@ a:visited {
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+/* Paste button - hidden by default, shown on mobile in place of the hint */
+.paste-button {
+  display: none;
+  padding: 14px 0;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.paste-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .or {
@@ -1054,6 +1077,15 @@ select.form-control-input:focus {
     min-width: auto;
     width: 100%;
     padding: 40px 20px;
+  }
+
+  /* Show a paste button instead of the ctrl+v hint on mobile */
+  .paste-hint {
+    display: none;
+  }
+
+  .paste-button {
+    display: block;
   }
 }
 

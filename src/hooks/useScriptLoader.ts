@@ -86,6 +86,25 @@ export function useScriptLoader() {
     reader.readAsText(file);
   };
 
+  const handlePasteButton = async () => {
+    if (!navigator.clipboard?.readText) {
+      setError(
+        "Clipboard access isn't available in this browser (it requires HTTPS). Try pasting into the JSON editor manually instead.",
+      );
+      return;
+    }
+
+    try {
+      const pastedText = await navigator.clipboard.readText();
+      const json = JSON5.parse(pastedText);
+      loadScript(json);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to read clipboard",
+      );
+    }
+  };
+
   const handleSort = () => {
     if (!rawScript) return;
 
@@ -209,6 +228,7 @@ export function useScriptLoader() {
     loadScript,
     handleScriptTextChange,
     handleFileUpload,
+    handlePasteButton,
     handleSort,
     handleSaveScript,
     updateScriptMetadata,
